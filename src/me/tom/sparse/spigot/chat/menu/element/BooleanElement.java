@@ -21,10 +21,23 @@ public class BooleanElement extends Element
 	protected ChatColor trueColor  = ChatColor.GREEN;
 	protected ChatColor falseColor = ChatColor.RED;
 	
+	protected boolean showText = false;
+	
 	public BooleanElement(int x, int y, boolean value)
 	{
 		super(x, y);
 		this.value = new State<>(value);
+	}
+	
+	public BooleanElement showText()
+	{
+		setShowText(true);
+		return this;
+	}
+	
+	public void setShowText(boolean showText)
+	{
+		this.showText = showText;
 	}
 	
 	public BooleanElement colors(ChatColor trueColor, ChatColor falseColor)
@@ -56,7 +69,7 @@ public class BooleanElement extends Element
 	
 	public int getWidth()
 	{
-		return 8 + ChatMenuAPI.getWidth(" " + value);
+		return 8 + (showText ? ChatMenuAPI.getWidth(" " + value) : 0);
 	}
 	
 	public int getHeight()
@@ -75,7 +88,8 @@ public class BooleanElement extends Element
 		c.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, baseCommand + !current));
 		components.add(c);
 		
-		components.add(new TextComponent(" " + current));
+		if(showText)
+			components.add(new TextComponent(" " + current));
 		
 		return Collections.singletonList(new Text(components));
 	}
