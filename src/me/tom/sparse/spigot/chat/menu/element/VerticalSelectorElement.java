@@ -13,6 +13,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * A vertical list of options. Similar to a column of radio buttons.
+ */
 public class VerticalSelectorElement extends Element
 {
 	protected static final int SELECTED_PREFIX_WIDTH = ChatMenuAPI.getWidth("> ");
@@ -25,6 +28,14 @@ public class VerticalSelectorElement extends Element
 	
 	protected ChatColor selectedColor = ChatColor.GREEN;
 	
+	/**
+	 * Constructs a {@code VerticalSelectorElement}
+	 *
+	 * @param x               the x coordinate
+	 * @param y               the y coordinate
+	 * @param defaultSelected the selected option index
+	 * @param options         the list of options. Options may not contain {@code \n}
+	 */
 	public VerticalSelectorElement(int x, int y, int defaultSelected, String... options)
 	{
 		super(x, y);
@@ -47,26 +58,46 @@ public class VerticalSelectorElement extends Element
 		return Math.max(Math.min(v, options.length), 0);
 	}
 	
+	/**
+	 *
+	 * @param selectedColor the new color for the selected element. Can be {@code null}
+	 */
 	public void setSelectedColor(ChatColor selectedColor)
 	{
 		this.selectedColor = selectedColor;
 	}
 	
+	/**
+	 *
+	 * @return the color for the selected element
+	 */
 	public ChatColor getSelectedColor()
 	{
 		return selectedColor;
 	}
 	
+	/**
+	 *
+	 * @param value the new selected option index
+	 */
 	public void setSelectedIndex(int value)
 	{
 		this.value.set(value);
 	}
 	
+	/**
+	 *
+	 * @return the currently selected option index
+	 */
 	public int getSelectedIndex()
 	{
 		return value.current();
 	}
 	
+	/**
+	 *
+	 * @return the currently selected option
+	 */
 	public String getSelectedOption()
 	{
 		int selectedIndex = value.current();

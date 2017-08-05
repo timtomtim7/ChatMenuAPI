@@ -7,6 +7,9 @@ import me.tom.sparse.spigot.chat.util.Text;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Basic text.
+ */
 public class TextElement extends Element
 {
 	protected static final int BORDER_WIDTH = ChatMenuAPI.getWidth("|  |");
@@ -17,6 +20,13 @@ public class TextElement extends Element
 	protected TextAlignment alignment = TextAlignment.LEFT;
 	protected boolean border;
 	
+	/**
+	 * Constructs a {@code TextElement} with {@link TextAlignment#LEFT} and no border
+	 *
+	 * @param text the starting text. May contain {@code \n}
+	 * @param x    the x coordinate
+	 * @param y    the y coordinate
+	 */
 	public TextElement(String text, int x, int y)
 	{
 		super(x, y);
@@ -36,6 +46,13 @@ public class TextElement extends Element
 		}
 	}
 	
+	/**
+	 * Constructs a {@code TextElement} with {@link TextAlignment#LEFT} and no border
+	 *
+	 * @param x    the x coordinate
+	 * @param y    the y coordinate
+	 * @param text the lines of text. Lines may not contain {@code \n}
+	 */
 	public TextElement(int x, int y, String... text)
 	{
 		super(x, y);
@@ -51,41 +68,70 @@ public class TextElement extends Element
 		}
 	}
 	
+	/**
+	 * Adds a border around the text
+	 *
+	 * @return this
+	 */
 	public TextElement border()
 	{
 		this.border = true;
 		return this;
 	}
 	
+	/**
+	 * @param border whether there should be a border around the text
+	 */
 	public void setBorder(boolean border)
 	{
 		this.border = border;
 	}
 	
+	/**
+	 * @return true if there is a border around the text
+	 */
 	public boolean isBordered()
 	{
 		return border;
 	}
 	
+	/**
+	 * Sets the text alignment
+	 *
+	 * @param alignment the new text alignment
+	 * @return this
+	 */
 	public TextElement align(TextAlignment alignment)
 	{
 		setAlignment(alignment);
 		return this;
 	}
 	
+	/**
+	 * @return the current text alignment
+	 */
+	public TextAlignment getAlignment()
+	{
+		return alignment;
+	}
+	
+	/**
+	 * @param alignment the new text alignment
+	 */
 	public void setAlignment(TextAlignment alignment)
 	{
 		this.alignment = alignment == null ? TextAlignment.LEFT : alignment;
 	}
 	
+	/**
+	 * Sets the width of this element, excluding the border
+	 * @deprecated because the width can be set to less than the actual width of the text
+	 * @param width the new width
+	 */
+	@Deprecated
 	public void setWidth(int width)
 	{
 		this.width = width;
-	}
-	
-	public TextAlignment getAlignment()
-	{
-		return alignment;
 	}
 	
 	public int getWidth()

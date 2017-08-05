@@ -19,6 +19,14 @@ public class InputElement extends Element
 	protected int     width;
 	private   boolean editing;
 	
+	/**
+	 * Constructs a new {@code InputElement}
+	 *
+	 * @param x     the x coordinate
+	 * @param y     the y coordinate
+	 * @param width the max width of the text
+	 * @param value the starting text
+	 */
 	public InputElement(int x, int y, int width, String value)
 	{
 		super(x, y);
@@ -26,11 +34,19 @@ public class InputElement extends Element
 		this.value = new State<>(value);
 	}
 	
+	/**
+	 *
+	 * @return the current value
+	 */
 	public String getValue()
 	{
 		return value.current();
 	}
 	
+	/**
+	 * Sets the text of this element, if the text is longer than the max width it will display "Too long"
+	 * @param value the new value
+	 */
 	public void setValue(String value)
 	{
 //		if(ChatMenuAPI.getWidth(text) > width)

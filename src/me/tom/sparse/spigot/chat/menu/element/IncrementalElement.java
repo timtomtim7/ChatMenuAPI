@@ -13,18 +13,35 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * A number with a subtract button on the left and a add button on the right.
+ */
 public class IncrementalElement extends Element
 {
-	//	protected int value;
 	public final State<Integer> value;
 	protected int min = Integer.MIN_VALUE, max = Integer.MAX_VALUE;
 	
+	/**
+	 * Construct a new {@code IncrementalElement} with a minimum of {@link Integer#MIN_VALUE} and a maximum of {@link Integer#MAX_VALUE}
+	 *
+	 * @param x     the x coordinate
+	 * @param y     the y coordinate
+	 * @param value the starting value
+	 */
 	public IncrementalElement(int x, int y, int value)
 	{
 		super(x, y);
 		this.value = new State<>(value, this::filter);
 	}
 	
+	/**
+	 * Constructs a new {@code IncrementalElement}
+	 * @param x the x coordinate
+	 * @param y the y coordinate
+	 * @param min the minimum value
+	 * @param max the maximum value
+	 * @param value the starting value
+	 */
 	public IncrementalElement(int x, int y, int min, int max, int value)
 	{
 		super(x, y);
@@ -38,31 +55,56 @@ public class IncrementalElement extends Element
 		return Math.min(Math.max(v, min), max);
 	}
 	
+	/**
+	 *
+	 * @return the minimum value
+	 */
 	public int getMin()
 	{
 		return min;
 	}
 	
+	/**
+	 *
+	 * @param min the new minimum value
+	 */
 	public void setMin(int min)
 	{
 		this.min = min;
+		value.set(value.current());
 	}
 	
+	/**
+	 *
+	 * @return the maximum value
+	 */
 	public int getMax()
 	{
 		return max;
 	}
 	
+	/**
+	 *
+	 * @param max the new maximum value
+	 */
 	public void setMax(int max)
 	{
 		this.max = max;
 	}
 	
+	/**
+	 *
+	 * @param value the new value
+	 */
 	public void setValue(int value)
 	{
 		this.value.set(value);
 	}
 	
+	/**
+	 *
+	 * @return the current value
+	 */
 	public int getValue()
 	{
 		return value.current();

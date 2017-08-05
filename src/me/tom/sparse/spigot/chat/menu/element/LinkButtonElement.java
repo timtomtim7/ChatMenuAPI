@@ -10,11 +10,22 @@ import net.md_5.bungee.api.chat.TextComponent;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * A button that opens a link when clicked.
+ */
 public class LinkButtonElement extends Element
 {
 	protected String text;
 	protected String link;
 	
+	/**
+	 * Constructs a new {@code LinkButtonElement}
+	 *
+	 * @param x    the x coordinate
+	 * @param y    the y coordinate
+	 * @param text the text to display
+	 * @param link the link
+	 */
 	public LinkButtonElement(int x, int y, String text, String link)
 	{
 		super(x, y);
@@ -24,16 +35,40 @@ public class LinkButtonElement extends Element
 		this.link = link;
 	}
 	
+	/**
+	 *
+	 * @return the text that displays for this button
+	 */
 	public String getText()
 	{
 		return text;
 	}
 	
+	/**
+	 *
+	 * @param text the new text to display
+	 */
 	public void setText(String text)
 	{
 		if(text.contains("\n"))
 			throw new IllegalArgumentException("Button text cannot contain newline");
 		this.text = text;
+	}
+	
+	/**
+	 * @return the link
+	 */
+	public String getLink()
+	{
+		return link;
+	}
+	
+	/**
+	 * @param link the new link
+	 */
+	public void setLink(String link)
+	{
+		this.link = link;
 	}
 	
 	public int getWidth()

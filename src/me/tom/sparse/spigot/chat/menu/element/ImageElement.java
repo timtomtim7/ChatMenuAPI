@@ -12,6 +12,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+@Deprecated
 public class ImageElement extends Element
 {
 	public static final List<ChatColor> COLORS = Collections.unmodifiableList(Arrays.asList(

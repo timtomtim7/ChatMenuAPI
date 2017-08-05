@@ -30,6 +30,14 @@ public class NumberSliderElement extends Element
 	
 	protected int precision = 6;
 	
+	/**
+	 * Constructs a {@code NumberSliderElement} with {@link NumberFormat#PERCENTAGE} formatting
+	 *
+	 * @param x      the x coordinate
+	 * @param y      the y coordinate
+	 * @param length the number of bars to display
+	 * @param value  the number of bars that are full
+	 */
 	public NumberSliderElement(int x, int y, int length, int value)
 	{
 		super(x, y);
@@ -37,11 +45,21 @@ public class NumberSliderElement extends Element
 		this.value = new State<>(value, this::filter);
 	}
 	
-	public NumberSliderElement(int x, int y)
+	/**
+	 * Constructs a {@code NumberSliderElement}
+	 *
+	 * @param x      the x coordinate
+	 * @param y      the y coordinate
+	 * @param length the number of bars to display
+	 * @param value  the number of bars that are full
+	 * @param format the format for the number
+	 */
+	public NumberSliderElement(int x, int y, int length, int value, NumberFormat format)
 	{
 		super(x, y);
-		this.length = 5;
-		this.value = new State<>(0, this::filter);
+		this.length = length;
+		this.value = new State<>(value, this::filter);
+		this.numberFormat = format == null ? NumberFormat.NONE : format;
 	}
 	
 	private int filter(int v)
@@ -49,6 +67,12 @@ public class NumberSliderElement extends Element
 		return Math.max(Math.min(v, length), 0);
 	}
 	
+	/**
+	 * Sets the colors that should be used when displaying this.
+	 * @param fullColor the color for all of the full bars
+	 * @param emptyColor the color for all of the empty bars
+	 * @return this
+	 */
 	public NumberSliderElement colors(ChatColor fullColor, ChatColor emptyColor)
 	{
 		setFullColor(fullColor);
@@ -56,32 +80,56 @@ public class NumberSliderElement extends Element
 		return this;
 	}
 	
+	/**
+	 * Sets the number format to {@link NumberFormat#NONE}
+	 * @return this
+	 */
 	public NumberSliderElement hideNumber()
 	{
 		return numberFormat(NumberFormat.NONE);
 	}
 	
+	/**
+	 * Sets the number format
+	 * @param format the new number format
+	 * @return this
+	 */
 	public NumberSliderElement numberFormat(NumberFormat format)
 	{
 		setNumberFormat(format);
 		return this;
 	}
 	
+	/**
+	 *
+	 * @return the current number format
+	 */
 	public NumberFormat getNumberFormat()
 	{
 		return numberFormat;
 	}
 	
-	public void setNumberFormat(NumberFormat numberFormat)
+	/**
+	 * @param format the new number format
+	 */
+	public void setNumberFormat(NumberFormat format)
 	{
-		this.numberFormat = numberFormat;
+		this.numberFormat = format == null ? NumberFormat.NONE : format;
 	}
 	
+	/**
+	 *
+	 * @return the precision. Must be within (inclusive) {@link NumberSliderElement#MIN_PRECISION} and {@link NumberSliderElement#MAX_PRECISION}
+	 */
 	public int getPrecision()
 	{
 		return precision;
 	}
 	
+	/**
+	 * Sets the precision of this. Precision determines how wide the bars will be, higher precision means smaller bars.
+	 * @param precision the new precision. Must be within (inclusive) {@link NumberSliderElement#MIN_PRECISION} and {@link NumberSliderElement#MAX_PRECISION}
+	 */
 	public void setPrecision(int precision)
 	{
 		if(precision < 0 || precision > 7)
@@ -89,64 +137,117 @@ public class NumberSliderElement extends Element
 		this.precision = precision;
 	}
 	
+	/**
+	 * Sets the precision of this. Precision determines how wide the bars will be, higher precision means smaller bars.
+	 * @param precision the new precision. Must be within (inclusive) {@link NumberSliderElement#MIN_PRECISION} and {@link NumberSliderElement#MAX_PRECISION}
+	 * @return this
+	 */
 	public NumberSliderElement precision(int precision)
 	{
 		setPrecision(precision);
 		return this;
 	}
+
+//	 * @param fullColor the color for all of the full bars
+//	 * @param emptyColor the color for all of the empty bars
 	
+	/**
+	 *
+	 * @return the color for all of the empty bars
+	 */
 	public ChatColor getEmptyColor()
 	{
 		return emptyColor;
 	}
 	
+	/**
+	 *
+	 * @param emptyColor the new color for all of the empty bars
+	 */
 	public void setEmptyColor(ChatColor emptyColor)
 	{
 		this.emptyColor = emptyColor == null ? ChatColor.RED : emptyColor;
 	}
 	
+	/**
+	 *
+	 * @return the color for all of the full bars
+	 */
 	public ChatColor getFullColor()
 	{
 		return fullColor;
 	}
 	
+	/**
+	 *
+	 * @param fullColor the new color for all of the full bars
+	 */
 	public void setFullColor(ChatColor fullColor)
 	{
 		this.fullColor = fullColor == null ? ChatColor.GREEN : fullColor;
 	}
 	
+	/**
+	 *
+	 * @return the number of bars that get displayed
+	 */
 	public int getLength()
 	{
 		return length;
 	}
 	
+	/**
+	 *
+	 * @param length thew new number of bars to display
+	 */
 	public void setLength(int length)
 	{
 		this.length = length < 0 ? 10 : length;
 	}
 	
+	/**
+	 * Sets the length of this (based on the current precision) to attempt to make the width match as closely as possible to the target width.
+	 * @param width the width to attempt to match
+	 */
 	public void setWidth(int width)
 	{
 		int charWidth = ChatMenuAPI.getCharacterWidth(getCharacter());
 		length = width / charWidth;
 	}
 	
+	/**
+	 * Sets the length of this (based on the current precision) to attempt to make the width match as closely as possible to the target width.
+	 * @param width the width to attempt to match
+	 * @return this
+	 */
 	public NumberSliderElement width(int width)
 	{
 		setWidth(width);
 		return this;
 	}
 	
+	/**
+	 *
+	 * @return the current value
+	 */
 	public int getValue()
 	{
 		return value.current();
 	}
 	
+	/**
+	 *
+	 * @param value the new value. Must not be less than 0 or more than {@code length}
+	 */
 	public void setValue(int value)
 	{
 		this.value.set(value);
 	}
 	
+	/**
+	 *
+	 * @return the bar character used based on the current precision
+	 */
 	public char getCharacter()
 	{
 		return (char) ('\u2588' + precision);

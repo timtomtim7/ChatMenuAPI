@@ -13,6 +13,9 @@ import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
+/**
+ * A button that runs a callback when clicked.
+ */
 public class ButtonElement extends Element
 {
 	public static ButtonElement createCloseButton(int x, int y, String text, ChatMenu menu)
@@ -26,11 +29,25 @@ public class ButtonElement extends Element
 	protected String                    text;
 	protected Function<Player, Boolean> callback;
 	
+	/**
+	 * Construct a {@code ButtonElement} with no callback.
+	 *
+	 * @param x    the x coordinate
+	 * @param y    the y coordinate
+	 * @param text the text
+	 */
 	public ButtonElement(int x, int y, String text)
 	{
 		this(x, y, text, (Function<Player, Boolean>) null);
 	}
 	
+	/**
+	 * Constructs a {@code ButtonElement} with the provided callback. Will always resend the menu after the button is clicked.
+	 * @param x the x coordinate
+	 * @param y the y coordinate
+	 * @param text the text
+	 * @param callback the callback to be called when the button is clicked.
+	 */
 	public ButtonElement(int x, int y, String text, Consumer<Player> callback)
 	{
 		this(x, y, text, player -> {
@@ -39,6 +56,13 @@ public class ButtonElement extends Element
 		});
 	}
 	
+	/**
+	 * Constructs a {@code ButtonElement} with the provided callback.
+	 * @param x the x coordinate
+	 * @param y the y coordinate
+	 * @param text the text
+	 * @param callback the callback to be called when the button is clicked. Should return {@code true} to automatically resend the menu.
+	 */
 	public ButtonElement(int x, int y, String text, Function<Player, Boolean> callback)
 	{
 		super(x, y);
@@ -48,11 +72,19 @@ public class ButtonElement extends Element
 		this.callback = callback;
 	}
 	
+	/**
+	 *
+	 * @return the text this button displays
+	 */
 	public String getText()
 	{
 		return text;
 	}
 	
+	/**
+	 *
+	 * @param text the new text this button should display
+	 */
 	public void setText(String text)
 	{
 		if(text.contains("\n"))
