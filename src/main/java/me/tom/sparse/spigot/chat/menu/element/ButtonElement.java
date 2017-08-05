@@ -43,9 +43,10 @@ public class ButtonElement extends Element
 	
 	/**
 	 * Constructs a {@code ButtonElement} with the provided callback. Will always resend the menu after the button is clicked.
-	 * @param x the x coordinate
-	 * @param y the y coordinate
-	 * @param text the text
+	 *
+	 * @param x        the x coordinate
+	 * @param y        the y coordinate
+	 * @param text     the text
 	 * @param callback the callback to be called when the button is clicked.
 	 */
 	public ButtonElement(int x, int y, String text, Consumer<Player> callback)
@@ -58,9 +59,10 @@ public class ButtonElement extends Element
 	
 	/**
 	 * Constructs a {@code ButtonElement} with the provided callback.
-	 * @param x the x coordinate
-	 * @param y the y coordinate
-	 * @param text the text
+	 *
+	 * @param x        the x coordinate
+	 * @param y        the y coordinate
+	 * @param text     the text
 	 * @param callback the callback to be called when the button is clicked. Should return {@code true} to automatically resend the menu.
 	 */
 	public ButtonElement(int x, int y, String text, Function<Player, Boolean> callback)
@@ -73,7 +75,6 @@ public class ButtonElement extends Element
 	}
 	
 	/**
-	 *
 	 * @return the text this button displays
 	 */
 	public String getText()
@@ -82,7 +83,6 @@ public class ButtonElement extends Element
 	}
 	
 	/**
-	 *
 	 * @param text the new text this button should display
 	 */
 	public void setText(String text)

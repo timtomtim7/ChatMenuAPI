@@ -41,6 +41,7 @@ public class BooleanElement extends Element
 	
 	/**
 	 * Shows the "true/false" text after the symbol.
+	 *
 	 * @return this
 	 */
 	public BooleanElement showText()
@@ -50,7 +51,6 @@ public class BooleanElement extends Element
 	}
 	
 	/**
-	 *
 	 * @param showText whether or not to show the "true/false" text
 	 */
 	public void setShowText(boolean showText)
@@ -59,8 +59,7 @@ public class BooleanElement extends Element
 	}
 	
 	/**
-	 *
-	 * @param trueColor The color the symbol should be if the value is {@code true}
+	 * @param trueColor  The color the symbol should be if the value is {@code true}
 	 * @param falseColor The color the symbol should be if the value is {@code false}
 	 * @return this
 	 */
@@ -72,7 +71,6 @@ public class BooleanElement extends Element
 	}
 	
 	/**
-	 *
 	 * @return the color the text will be if the value is {@code false}
 	 */
 	public ChatColor getFalseColor()
@@ -81,7 +79,6 @@ public class BooleanElement extends Element
 	}
 	
 	/**
-	 *
 	 * @param falseColor the color the symbol should be if the value is {@code false}
 	 */
 	public void setFalseColor(ChatColor falseColor)
@@ -90,7 +87,6 @@ public class BooleanElement extends Element
 	}
 	
 	/**
-	 *
 	 * @return the color the text will be if the value is {@code true}
 	 */
 	public ChatColor getTrueColor()
@@ -99,7 +95,6 @@ public class BooleanElement extends Element
 	}
 	
 	/**
-	 *
 	 * @param trueColor The color the symbol should be if the value is {@code true}
 	 */
 	public void setTrueColor(ChatColor trueColor)
@@ -140,7 +135,6 @@ public class BooleanElement extends Element
 	}
 	
 	/**
-	 *
 	 * @return the current value
 	 */
 	public boolean getValue()
@@ -149,7 +143,6 @@ public class BooleanElement extends Element
 	}
 	
 	/**
-	 *
 	 * @param value the new value
 	 */
 	public void setValue(boolean value)

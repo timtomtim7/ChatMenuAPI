@@ -69,7 +69,8 @@ public class NumberSliderElement extends Element
 	
 	/**
 	 * Sets the colors that should be used when displaying this.
-	 * @param fullColor the color for all of the full bars
+	 *
+	 * @param fullColor  the color for all of the full bars
 	 * @param emptyColor the color for all of the empty bars
 	 * @return this
 	 */
@@ -82,6 +83,7 @@ public class NumberSliderElement extends Element
 	
 	/**
 	 * Sets the number format to {@link NumberFormat#NONE}
+	 *
 	 * @return this
 	 */
 	public NumberSliderElement hideNumber()
@@ -91,6 +93,7 @@ public class NumberSliderElement extends Element
 	
 	/**
 	 * Sets the number format
+	 *
 	 * @param format the new number format
 	 * @return this
 	 */
@@ -101,7 +104,6 @@ public class NumberSliderElement extends Element
 	}
 	
 	/**
-	 *
 	 * @return the current number format
 	 */
 	public NumberFormat getNumberFormat()
@@ -118,7 +120,6 @@ public class NumberSliderElement extends Element
 	}
 	
 	/**
-	 *
 	 * @return the precision. Must be within (inclusive) {@link NumberSliderElement#MIN_PRECISION} and {@link NumberSliderElement#MAX_PRECISION}
 	 */
 	public int getPrecision()
@@ -128,6 +129,7 @@ public class NumberSliderElement extends Element
 	
 	/**
 	 * Sets the precision of this. Precision determines how wide the bars will be, higher precision means smaller bars.
+	 *
 	 * @param precision the new precision. Must be within (inclusive) {@link NumberSliderElement#MIN_PRECISION} and {@link NumberSliderElement#MAX_PRECISION}
 	 */
 	public void setPrecision(int precision)
@@ -139,6 +141,7 @@ public class NumberSliderElement extends Element
 	
 	/**
 	 * Sets the precision of this. Precision determines how wide the bars will be, higher precision means smaller bars.
+	 *
 	 * @param precision the new precision. Must be within (inclusive) {@link NumberSliderElement#MIN_PRECISION} and {@link NumberSliderElement#MAX_PRECISION}
 	 * @return this
 	 */
@@ -152,7 +155,6 @@ public class NumberSliderElement extends Element
 //	 * @param emptyColor the color for all of the empty bars
 	
 	/**
-	 *
 	 * @return the color for all of the empty bars
 	 */
 	public ChatColor getEmptyColor()
@@ -161,7 +163,6 @@ public class NumberSliderElement extends Element
 	}
 	
 	/**
-	 *
 	 * @param emptyColor the new color for all of the empty bars
 	 */
 	public void setEmptyColor(ChatColor emptyColor)
@@ -170,7 +171,6 @@ public class NumberSliderElement extends Element
 	}
 	
 	/**
-	 *
 	 * @return the color for all of the full bars
 	 */
 	public ChatColor getFullColor()
@@ -179,7 +179,6 @@ public class NumberSliderElement extends Element
 	}
 	
 	/**
-	 *
 	 * @param fullColor the new color for all of the full bars
 	 */
 	public void setFullColor(ChatColor fullColor)
@@ -188,7 +187,6 @@ public class NumberSliderElement extends Element
 	}
 	
 	/**
-	 *
 	 * @return the number of bars that get displayed
 	 */
 	public int getLength()
@@ -197,7 +195,6 @@ public class NumberSliderElement extends Element
 	}
 	
 	/**
-	 *
 	 * @param length thew new number of bars to display
 	 */
 	public void setLength(int length)
@@ -207,6 +204,7 @@ public class NumberSliderElement extends Element
 	
 	/**
 	 * Sets the length of this (based on the current precision) to attempt to make the width match as closely as possible to the target width.
+	 *
 	 * @param width the width to attempt to match
 	 */
 	public void setWidth(int width)
@@ -217,6 +215,7 @@ public class NumberSliderElement extends Element
 	
 	/**
 	 * Sets the length of this (based on the current precision) to attempt to make the width match as closely as possible to the target width.
+	 *
 	 * @param width the width to attempt to match
 	 * @return this
 	 */
@@ -227,7 +226,6 @@ public class NumberSliderElement extends Element
 	}
 	
 	/**
-	 *
 	 * @return the current value
 	 */
 	public int getValue()
@@ -236,7 +234,6 @@ public class NumberSliderElement extends Element
 	}
 	
 	/**
-	 *
 	 * @param value the new value. Must not be less than 0 or more than {@code length}
 	 */
 	public void setValue(int value)
@@ -245,7 +242,6 @@ public class NumberSliderElement extends Element
 	}
 	
 	/**
-	 *
 	 * @return the bar character used based on the current precision
 	 */
 	public char getCharacter()

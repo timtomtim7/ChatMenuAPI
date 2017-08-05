@@ -125,8 +125,9 @@ public class TextElement extends Element
 	
 	/**
 	 * Sets the width of this element, excluding the border
-	 * @deprecated because the width can be set to less than the actual width of the text
+	 *
 	 * @param width the new width
+	 * @deprecated because the width can be set to less than the actual width of the text
 	 */
 	@Deprecated
 	public void setWidth(int width)

@@ -36,7 +36,6 @@ public class LinkButtonElement extends Element
 	}
 	
 	/**
-	 *
 	 * @return the text that displays for this button
 	 */
 	public String getText()
@@ -45,7 +44,6 @@ public class LinkButtonElement extends Element
 	}
 	
 	/**
-	 *
 	 * @param text the new text to display
 	 */
 	public void setText(String text)

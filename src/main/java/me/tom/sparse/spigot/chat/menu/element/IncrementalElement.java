@@ -36,10 +36,11 @@ public class IncrementalElement extends Element
 	
 	/**
 	 * Constructs a new {@code IncrementalElement}
-	 * @param x the x coordinate
-	 * @param y the y coordinate
-	 * @param min the minimum value
-	 * @param max the maximum value
+	 *
+	 * @param x     the x coordinate
+	 * @param y     the y coordinate
+	 * @param min   the minimum value
+	 * @param max   the maximum value
 	 * @param value the starting value
 	 */
 	public IncrementalElement(int x, int y, int min, int max, int value)
@@ -56,7 +57,6 @@ public class IncrementalElement extends Element
 	}
 	
 	/**
-	 *
 	 * @return the minimum value
 	 */
 	public int getMin()
@@ -65,7 +65,6 @@ public class IncrementalElement extends Element
 	}
 	
 	/**
-	 *
 	 * @param min the new minimum value
 	 */
 	public void setMin(int min)
@@ -75,7 +74,6 @@ public class IncrementalElement extends Element
 	}
 	
 	/**
-	 *
 	 * @return the maximum value
 	 */
 	public int getMax()
@@ -84,7 +82,6 @@ public class IncrementalElement extends Element
 	}
 	
 	/**
-	 *
 	 * @param max the new maximum value
 	 */
 	public void setMax(int max)
@@ -93,7 +90,6 @@ public class IncrementalElement extends Element
 	}
 	
 	/**
-	 *
 	 * @param value the new value
 	 */
 	public void setValue(int value)
@@ -102,7 +98,6 @@ public class IncrementalElement extends Element
 	}
 	
 	/**
-	 *
 	 * @return the current value
 	 */
 	public int getValue()

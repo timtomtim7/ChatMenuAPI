@@ -59,7 +59,6 @@ public class VerticalSelectorElement extends Element
 	}
 	
 	/**
-	 *
 	 * @param selectedColor the new color for the selected element. Can be {@code null}
 	 */
 	public void setSelectedColor(ChatColor selectedColor)
@@ -68,7 +67,6 @@ public class VerticalSelectorElement extends Element
 	}
 	
 	/**
-	 *
 	 * @return the color for the selected element
 	 */
 	public ChatColor getSelectedColor()
@@ -77,7 +75,6 @@ public class VerticalSelectorElement extends Element
 	}
 	
 	/**
-	 *
 	 * @param value the new selected option index
 	 */
 	public void setSelectedIndex(int value)
@@ -86,7 +83,6 @@ public class VerticalSelectorElement extends Element
 	}
 	
 	/**
-	 *
 	 * @return the currently selected option index
 	 */
 	public int getSelectedIndex()
@@ -95,7 +91,6 @@ public class VerticalSelectorElement extends Element
 	}
 	
 	/**
-	 *
 	 * @return the currently selected option
 	 */
 	public String getSelectedOption()

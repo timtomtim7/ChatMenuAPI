@@ -35,7 +35,6 @@ public class InputElement extends Element
 	}
 	
 	/**
-	 *
 	 * @return the current value
 	 */
 	public String getValue()
@@ -45,6 +44,7 @@ public class InputElement extends Element
 	
 	/**
 	 * Sets the text of this element, if the text is longer than the max width it will display "Too long"
+	 *
 	 * @param value the new value
 	 */
 	public void setValue(String value)
