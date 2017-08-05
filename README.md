@@ -43,7 +43,7 @@ When this menu is sent to a player, it will automatically pause outgoing chat to
 
 ### Element
 Elements are the building blocks of menus. They are used to represent everything in a menu.
-There are a few elements provided by default, you can view them by [clicking here](../blob/master/src/me/tom/sparse/spigot/chat/menu/element).
+There are a few elements provided by default, you can view them by [clicking here](../master/src/me/tom/sparse/spigot/chat/menu/element).
 
 Basic `TextElement`:
 ```Java
