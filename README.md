@@ -8,16 +8,16 @@ This API treats Minecraft's chat like a 2D grid, allowing you to position elemen
 ---
 
 ## Contents
-* [ChatMenuAPI](#ChatMenuAPI)
-  - [Preview](#Preview)
-  - [Contents](#Contents)
-  - [Usage](#Usage)
-    + [Setup](#Setup)
-    + [ChatMenu](#ChatMenu)
-    + [Element](#Element)
-    + [States](#States)
-    + [Displaying](#Displaying)
-  - [Links](#Links)
+* [ChatMenuAPI](#chatmenuapi)
+  - [Preview](#preview)
+  - [Contents](#contents)
+  - [Usage](#usage)
+    + [Setup](#setup)
+    + [ChatMenu](#chatmenu)
+    + [Element](#element)
+    + [States](#states)
+    + [Displaying](#displaying)
+  - [Links](#links)
 
 ---
 
