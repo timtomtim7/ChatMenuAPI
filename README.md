@@ -29,7 +29,7 @@ Add `ChatMenuAPI.jar` to your build path, then add it as a dependency in your `p
 depend: [ChatMenuAPI]
 ```
 ### ChatMenu
-To create a menu, just create a new instanceof `ChatMenu`:
+To create a menu, just create a new instance of `ChatMenu`:
 ```Java
 ChatMenu menu = new ChatMenu();
 ```
@@ -81,6 +81,5 @@ menu.openFor(p);
 ```
 
 ## Links
-* [Download](https://sparse.blue/docs/ChatMenuAPI/ChatMenuAPI.jar)
+* [Download](https://www.spigotmc.org/resources/chatmenuapi.45144/)
 * [JavaDoc](https://sparse.blue/docs/ChatMenuAPI/index.html)
-* (Soon to be on [SpigotMC](https://spigotmc.org))

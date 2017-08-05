@@ -15,6 +15,14 @@ import java.util.function.Function;
 
 public class ButtonElement extends Element
 {
+	public static ButtonElement createCloseButton(int x, int y, String text, ChatMenu menu)
+	{
+		return new ButtonElement(x, y, text, (p) -> {
+			menu.close(p);
+			return false;
+		});
+	}
+	
 	protected String                    text;
 	protected Function<Player, Boolean> callback;
 	
