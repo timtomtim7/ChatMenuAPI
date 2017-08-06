@@ -1,6 +1,7 @@
 package me.tom.sparse.spigot.chat.menu;
 
 import io.netty.util.internal.ConcurrentSet;
+import me.tom.sparse.spigot.chat.menu.element.ButtonElement;
 import me.tom.sparse.spigot.chat.menu.element.Element;
 import me.tom.sparse.spigot.chat.protocol.PlayerChatIntercept;
 import me.tom.sparse.spigot.chat.util.Text;
@@ -84,6 +85,19 @@ public class ChatMenu
 			throw new IllegalArgumentException("Cannot add null element");
 		elements.add(element);
 		elements.sort(Comparator.comparingInt(Element::getX));
+	}
+	
+	/**
+	 * Adds the provided element to this menu.
+	 *
+	 * @param t   the element to add to this menu
+	 * @param <T> the type of element
+	 * @return the element added
+	 */
+	public <T extends Element> T add(T t)
+	{
+		addElement(t);
+		return t;
 	}
 	
 	/**
@@ -219,17 +233,44 @@ public class ChatMenu
 		return registered;
 	}
 	
+	/**
+	 *
+	 * @return true if this menu will pause chat when it is opened
+	 */
 	public boolean doesPauseChat()
 	{
 		return pauseChat;
 	}
 	
+	/**
+	 * Makes this menu pause chat when it is opened
+	 * @return this
+	 */
 	public ChatMenu pauseChat()
 	{
 		setPauseChat(true);
 		return this;
 	}
 	
+	/**
+	 * Makes this menu pause chat when it is opened and adds a close button.
+	 *
+	 * @param x    the x coordinate of the close button
+	 * @param y    the y coordinate of the close button
+	 * @param text the text of the close button
+	 * @return this
+	 */
+	public ChatMenu pauseChat(int x, int y, String text)
+	{
+		setPauseChat(true);
+		addElement(ButtonElement.createCloseButton(x, y, text, this));
+		return this;
+	}
+	
+	/**
+	 *
+	 * @param pauseChat true if this menu should pause chat when it is opened
+	 */
 	public void setPauseChat(boolean pauseChat)
 	{
 		this.pauseChat = pauseChat;

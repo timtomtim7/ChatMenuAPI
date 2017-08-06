@@ -24,7 +24,7 @@ public class VerticalSelectorElement extends Element
 	protected int      width;
 	
 	//	protected int selectedIndex;
-	protected State<Integer> value;
+	public final State<Integer> value;
 	
 	protected ChatColor selectedColor = ChatColor.GREEN;
 	
@@ -39,7 +39,6 @@ public class VerticalSelectorElement extends Element
 	public VerticalSelectorElement(int x, int y, int defaultSelected, String... options)
 	{
 		super(x, y);
-		this.value = new State<>(defaultSelected, this::filter);
 		for(String option : options)
 		{
 			if(option.contains("\n"))
@@ -51,6 +50,7 @@ public class VerticalSelectorElement extends Element
 		}
 		
 		this.options = options;
+		this.value = new State<>(defaultSelected, this::filter);
 	}
 	
 	private int filter(int v)

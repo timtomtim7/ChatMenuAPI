@@ -68,6 +68,26 @@ public class TextElement extends Element
 		}
 	}
 	
+	public void setText(String text)
+	{
+		setLines(text.split("\n"));
+	}
+	
+	public void setLines(String... lines)
+	{
+		int newWidth = 0;
+		for(String line : lines)
+		{
+			if(line.contains("\n"))
+				throw new IllegalArgumentException("Cannot use TextElement line constructor with newline characters.");
+			int w = ChatMenuAPI.getWidth(line);
+			if(w > newWidth)
+				newWidth = w;
+		}
+		this.lines = lines;
+		this.width = newWidth;
+	}
+	
 	/**
 	 * Adds a border around the text
 	 *
