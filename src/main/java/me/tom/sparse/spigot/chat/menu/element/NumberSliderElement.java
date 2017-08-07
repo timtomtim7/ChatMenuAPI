@@ -1,7 +1,7 @@
 package me.tom.sparse.spigot.chat.menu.element;
 
-import me.tom.sparse.spigot.chat.menu.ChatMenu;
 import me.tom.sparse.spigot.chat.menu.ChatMenuAPI;
+import me.tom.sparse.spigot.chat.menu.IElementContainer;
 import me.tom.sparse.spigot.chat.util.NumberFormat;
 import me.tom.sparse.spigot.chat.util.State;
 import me.tom.sparse.spigot.chat.util.Text;
@@ -269,9 +269,9 @@ public class NumberSliderElement extends Element
 		return 1;
 	}
 	
-	public List<Text> render(ChatMenu menu, int elementIndex)
+	public List<Text> render(IElementContainer context)
 	{
-		String baseCommand = menu.getCommand() + elementIndex + " ";
+		String baseCommand = context.getCommand(this);
 		
 		List<BaseComponent> components = new ArrayList<>();
 		for(int i = 0; i < length; i++)
@@ -292,12 +292,12 @@ public class NumberSliderElement extends Element
 		return true;
 	}
 	
-	public boolean onClick(ChatMenu menu, Player player)
+	public boolean onClick(IElementContainer container, Player player)
 	{
-		return isEnabled() && super.onClick(menu, player);
+		return isEnabled() && super.onClick(container, player);
 	}
 	
-	public void edit(ChatMenu menu, String[] args)
+	public void edit(IElementContainer container, String[] args)
 	{
 		if(!isEnabled())
 			return;

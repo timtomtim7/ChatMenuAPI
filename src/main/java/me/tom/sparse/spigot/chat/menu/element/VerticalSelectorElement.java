@@ -1,7 +1,7 @@
 package me.tom.sparse.spigot.chat.menu.element;
 
-import me.tom.sparse.spigot.chat.menu.ChatMenu;
 import me.tom.sparse.spigot.chat.menu.ChatMenuAPI;
+import me.tom.sparse.spigot.chat.menu.IElementContainer;
 import me.tom.sparse.spigot.chat.util.State;
 import me.tom.sparse.spigot.chat.util.Text;
 import net.md_5.bungee.api.ChatColor;
@@ -114,9 +114,9 @@ public class VerticalSelectorElement extends Element
 		return true;
 	}
 	
-	public List<Text> render(ChatMenu menu, int elementIndex)
+	public List<Text> render(IElementContainer context)
 	{
-		String baseCommand = menu.getCommand() + elementIndex + " ";
+		String baseCommand = context.getCommand(this);
 		
 		List<Text> result = new ArrayList<>();
 		for(int i = 0; i < options.length; i++)
@@ -143,7 +143,7 @@ public class VerticalSelectorElement extends Element
 		return result;
 	}
 	
-	public void edit(ChatMenu menu, String[] args)
+	public void edit(IElementContainer container, String[] args)
 	{
 		value.set(Integer.parseInt(args[0]));
 	}

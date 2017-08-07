@@ -1,6 +1,6 @@
 package me.tom.sparse.spigot.chat.menu.element;
 
-import me.tom.sparse.spigot.chat.menu.ChatMenu;
+import me.tom.sparse.spigot.chat.menu.IElementContainer;
 import me.tom.sparse.spigot.chat.util.State;
 import me.tom.sparse.spigot.chat.util.Text;
 import org.bukkit.Sound;
@@ -18,6 +18,8 @@ public abstract class Element
 	protected float clickVolume = 0.5f;
 	protected float clickPitch  = 1;
 	
+	private boolean visible = true;
+	
 	/**
 	 * Constructs an element at the given x and y coordinates.
 	 *
@@ -28,6 +30,22 @@ public abstract class Element
 	{
 		this.x = x;
 		this.y = y;
+	}
+	
+	/**
+	 * @param visible whether this element should be visible
+	 */
+	public void setVisible(boolean visible)
+	{
+		this.visible = visible;
+	}
+	
+	/**
+	 * @return true if this element will be visible
+	 */
+	public boolean isVisible()
+	{
+		return visible;
 	}
 	
 	/**
@@ -185,22 +203,21 @@ public abstract class Element
 	}
 	
 	/**
-	 * @param menu         the menu this is being rendered for
-	 * @param elementIndex the index of this element in the menu
+	 * @param context the current render context
 	 * @return the rendered text
 	 */
-	public abstract List<Text> render(ChatMenu menu, int elementIndex);
+	public abstract List<Text> render(IElementContainer context);
 	
 	/**
 	 * Called when a player clicks this element.
 	 * <br>
 	 * More specifically, when a player runs the command to edit this element.
 	 *
-	 * @param menu   the menu this element was clicked on
+	 * @param container the container this element was clicked on
 	 * @param player the player that clicked this element
 	 * @return true if the menu should rebuild and resend
 	 */
-	public boolean onClick(ChatMenu menu, Player player)
+	public boolean onClick(IElementContainer container, Player player)
 	{
 		if(clickSound != null)
 			player.playSound(player.getEyeLocation(), clickSound, clickVolume, clickPitch);
@@ -209,21 +226,10 @@ public abstract class Element
 	
 	/**
 	 * Called to edit this element
-	 *
-	 * @param menu the menu this element is being edited on
+	 *  @param container the container this element is being edited on
 	 * @param args the data to be parsed
 	 */
-	public abstract void edit(ChatMenu menu, String[] args);
-	
-	/**
-	 * @param menu         the menu to edit
-	 * @param elementIndex the index of this element in the provided menu
-	 * @return the command to be run to edit this element
-	 */
-	public final String getCommand(ChatMenu menu, int elementIndex)
-	{
-		return menu.getCommand() + elementIndex + " ";
-	}
+	public abstract void edit(IElementContainer container, String[] args);
 	
 	/**
 	 * @return an unmodifiable {@link java.util.Collection} of all the states in this element.
@@ -231,5 +237,14 @@ public abstract class Element
 	public Collection<State<?>> getStates()
 	{
 		return Collections.emptyList();
+	}
+	
+	public String toString()
+	{
+		return getClass().getName() + "{" +
+				"x=" + x +
+				", y=" + y +
+				", visible=" + visible +
+				'}';
 	}
 }

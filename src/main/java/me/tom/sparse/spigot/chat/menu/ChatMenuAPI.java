@@ -145,15 +145,10 @@ public final class ChatMenuAPI
 		{
 			case ' ':
 				return 4;
-//			case '\u258E':
-//				return 3;
-//			case '\u258F':
-//				return 2;
-//			case '\u2588':
-//				return 9;
 			case '\u2714':
-			case '\u2718':
 				return 8;
+			case '\u2718':
+				return 7;
 			default:
 				MapFont.CharacterSprite mcChar = MinecraftFont.Font.getChar(c);
 				if(mcChar != null)

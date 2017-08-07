@@ -55,6 +55,8 @@ public class Text
 	public Text(Collection<BaseComponent> components)
 	{
 		this.components.addAll(components);
+		if(toLegacyText().contains("\n"))
+			throw new IllegalArgumentException("Text cannot have newline characters");
 		calculateWidth();
 	}
 	

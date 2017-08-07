@@ -10,7 +10,7 @@ import org.bukkit.entity.Player;
 
 import java.util.*;
 
-public class ChatMenu
+public class ChatMenu implements IElementContainer
 {
 	protected final String  id;
 	protected       boolean registered;
@@ -79,12 +79,10 @@ public class ChatMenu
 	 * @param element the element to add to this menu
 	 * @throws IllegalArgumentException if the element is null
 	 */
+	@Deprecated
 	public void addElement(Element element)
 	{
-		if(element == null)
-			throw new IllegalArgumentException("Cannot add null element");
-		elements.add(element);
-		elements.sort(Comparator.comparingInt(Element::getX));
+		add(element);
 	}
 	
 	/**
@@ -96,8 +94,21 @@ public class ChatMenu
 	 */
 	public <T extends Element> T add(T t)
 	{
-		addElement(t);
+		Objects.requireNonNull(t);
+		elements.add(t);
+		elements.sort(Comparator.comparingInt(Element::getX));
 		return t;
+	}
+	
+	/**
+	 * Removes the specified element from this menu.
+	 *
+	 * @param element the element to remove
+	 * @return true if the element was removed
+	 */
+	public boolean remove(Element element)
+	{
+		return elements.remove(element);
 	}
 	
 	/**
@@ -143,21 +154,23 @@ public class ChatMenu
 	
 	public List<BaseComponent[]> build()
 	{
-		if(anyOverlap())
+		Element overlapping = findOverlap();
+		if(overlapping != null)
 		{
 //			System.err.println("WARNING! Potential overlap detected.");
-			throw new IllegalStateException("Overlapping elements!");
+			throw new IllegalStateException("Overlapping element(s)! "+overlapping);
 		}
 		
 		List<Text> lines = new ArrayList<>(20);
 		for(int i = 0; i < 20; i++)
 			lines.add(new Text());
 		
-		for(int elementIndex = 0; elementIndex < elements.size(); elementIndex++)
+		for(Element element : elements)
 		{
-			Element element = elements.get(elementIndex);
+			if(!element.isVisible())
+				continue;
 			
-			List<Text> elementTexts = element.render(this, elementIndex);
+			List<Text> elementTexts = element.render(this);
 			for(int j = 0; j < elementTexts.size(); j++)
 			{
 				int lineY = element.getY() + j;
@@ -179,6 +192,12 @@ public class ChatMenu
 		List<BaseComponent[]> result = new ArrayList<>();
 		for(Text text : lines)
 		{
+			if(text.toLegacyText().contains("\n"))
+				throw new IllegalStateException("Menu contains line with newline character");
+			else if(text.getWidth() > 320)
+				throw new IllegalStateException("Menu contains line exceeds chat width");
+			
+			
 			List<BaseComponent> components = text.getComponents();
 			result.add(components.toArray(new BaseComponent[components.size()]));
 		}
@@ -188,9 +207,9 @@ public class ChatMenu
 	/**
 	 * @return true if any elements overlap
 	 */
-	public boolean anyOverlap()
+	public Element findOverlap()
 	{
-		return elements.stream().anyMatch(a -> elements.stream().anyMatch(b -> a != b && a.overlaps(b)));
+		return elements.stream().filter(Element::isVisible).filter(a -> elements.stream().filter(Element::isVisible).anyMatch(b -> a != b && a.overlaps(b))).findFirst().orElse(null);
 	}
 	
 	/**
@@ -223,6 +242,15 @@ public class ChatMenu
 		if(!isRegistered())
 			throw new IllegalStateException("Unregistered menus can't be interacted with.");
 		return "/cmapi " + id + " ";
+	}
+	
+	/**
+	 * @param element the element to interact with
+	 * @return the command used to interact with the provided element
+	 */
+	public String getCommand(Element element)
+	{
+		return getCommand() + elements.indexOf(element)+" ";
 	}
 	
 	/**
@@ -263,7 +291,7 @@ public class ChatMenu
 	public ChatMenu pauseChat(int x, int y, String text)
 	{
 		setPauseChat(true);
-		addElement(ButtonElement.createCloseButton(x, y, text, this));
+		add(ButtonElement.createCloseButton(x, y, text, this));
 		return this;
 	}
 	
@@ -289,5 +317,10 @@ public class ChatMenu
 		ChatMenu chatMenu = (ChatMenu) o;
 		
 		return id.equals(chatMenu.id);
+	}
+	
+	public ChatMenu getMenu()
+	{
+		return this;
 	}
 }

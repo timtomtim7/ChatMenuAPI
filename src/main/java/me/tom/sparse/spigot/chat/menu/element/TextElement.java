@@ -1,7 +1,7 @@
 package me.tom.sparse.spigot.chat.menu.element;
 
-import me.tom.sparse.spigot.chat.menu.ChatMenu;
 import me.tom.sparse.spigot.chat.menu.ChatMenuAPI;
+import me.tom.sparse.spigot.chat.menu.IElementContainer;
 import me.tom.sparse.spigot.chat.util.Text;
 
 import java.util.ArrayList;
@@ -165,7 +165,7 @@ public class TextElement extends Element
 		return border ? lines.length + 2 : lines.length;
 	}
 	
-	public List<Text> render(ChatMenu menu, int elementIndex)
+	public List<Text> render(IElementContainer context)
 	{
 		List<Text> result = new ArrayList<>();
 		if(alignment == TextAlignment.LEFT)
@@ -242,7 +242,7 @@ public class TextElement extends Element
 		return result;
 	}
 	
-	public void edit(ChatMenu menu, String[] args)
+	public void edit(IElementContainer container, String[] args)
 	{
 	
 	}

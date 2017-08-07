@@ -47,12 +47,17 @@ There are a few elements provided by default, you can view them by [clicking her
 
 Basic `TextElement`:
 ```Java
-menu.addElement(new TextElement("Hello, world!", 10, 10));
+menu.add(new TextElement("Hello, world!", 10, 10));
 ```
 
 Basic close button:
 ```Java
-menu.addElement(new ButtonElement(x, y, ChatColor.RED+"[Close]", (p) -> {menu.close(p); return false;}));
+menu.add(new ButtonElement(x, y, ChatColor.RED+"[Close]", (p) -> {menu.close(p); return false;}));
+```
+
+Instead of manually creating a close button, you can also just pass the arguments you would use for a close button directly into the `pauseChat` method.
+```Java
+ChatMenu menu = new ChatMenu().pauseChat(x, y, ChatColor.RED+"[Close]");
 ```
 
 All of the default elements require and X and Y in their constructor, 

@@ -1,7 +1,7 @@
 package me.tom.sparse.spigot.chat.menu.element;
 
-import me.tom.sparse.spigot.chat.menu.ChatMenu;
 import me.tom.sparse.spigot.chat.menu.ChatMenuAPI;
+import me.tom.sparse.spigot.chat.menu.IElementContainer;
 import me.tom.sparse.spigot.chat.util.Text;
 import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.ClickEvent;
@@ -79,7 +79,7 @@ public class LinkButtonElement extends Element
 		return 1;
 	}
 	
-	public List<Text> render(ChatMenu menu, int elementIndex)
+	public List<Text> render(IElementContainer context)
 	{
 		BaseComponent[] components = TextComponent.fromLegacyText(text);
 		ClickEvent click = new ClickEvent(ClickEvent.Action.OPEN_URL, link);
@@ -89,7 +89,7 @@ public class LinkButtonElement extends Element
 		return Collections.singletonList(new Text(components));
 	}
 	
-	public void edit(ChatMenu menu, String[] args)
+	public void edit(IElementContainer container, String[] args)
 	{
 	}
 }

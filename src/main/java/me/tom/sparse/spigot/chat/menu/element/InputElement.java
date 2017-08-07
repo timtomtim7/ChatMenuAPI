@@ -1,8 +1,8 @@
 package me.tom.sparse.spigot.chat.menu.element;
 
 import me.tom.sparse.spigot.chat.menu.CMListener;
-import me.tom.sparse.spigot.chat.menu.ChatMenu;
 import me.tom.sparse.spigot.chat.menu.ChatMenuAPI;
+import me.tom.sparse.spigot.chat.menu.IElementContainer;
 import me.tom.sparse.spigot.chat.util.State;
 import me.tom.sparse.spigot.chat.util.Text;
 import net.md_5.bungee.api.ChatColor;
@@ -64,9 +64,9 @@ public class InputElement extends Element
 		return 1;
 	}
 	
-	public List<Text> render(ChatMenu menu, int elementIndex)
+	public List<Text> render(IElementContainer context)
 	{
-		ClickEvent click = new ClickEvent(ClickEvent.Action.RUN_COMMAND, menu.getCommand() + " " + elementIndex);
+		ClickEvent click = new ClickEvent(ClickEvent.Action.RUN_COMMAND, context.getCommand(this));
 		
 		boolean tooLong = ChatMenuAPI.getWidth(value.current()) > width;
 		
@@ -84,10 +84,10 @@ public class InputElement extends Element
 		return Collections.singletonList(text);
 	}
 	
-	public boolean onClick(ChatMenu menu, Player player)
+	public boolean onClick(IElementContainer container, Player player)
 	{
-		super.onClick(menu, player);
-		menu.getElements().stream().filter(it -> it instanceof InputElement && it != this).map(it -> (InputElement) it).forEach(it -> it.editing = false);
+		super.onClick(container, player);
+		container.getElements().stream().filter(it -> it instanceof InputElement && it != this).map(it -> (InputElement) it).forEach(it -> it.editing = false);
 		editing = !editing;
 		
 		if(editing)
@@ -95,7 +95,7 @@ public class InputElement extends Element
 			CMListener.expectPlayerChat(player, (p, m) -> {
 				editing = false;
 				setValue(m);
-				menu.openFor(p);
+				container.openFor(p);
 				return true;
 			});
 		}else
@@ -106,7 +106,7 @@ public class InputElement extends Element
 		return true;
 	}
 	
-	public void edit(ChatMenu menu, String[] args)
+	public void edit(IElementContainer container, String[] args)
 	{
 	
 	}

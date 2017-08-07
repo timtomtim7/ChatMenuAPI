@@ -1,6 +1,6 @@
 package me.tom.sparse.spigot.chat.menu.element;
 
-import me.tom.sparse.spigot.chat.menu.ChatMenu;
+import me.tom.sparse.spigot.chat.menu.IElementContainer;
 import me.tom.sparse.spigot.chat.util.Text;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.chat.BaseComponent;
@@ -84,10 +84,10 @@ public class ImageElement extends Element
 		return true;
 	}
 	
-	public List<Text> render(ChatMenu menu, int elementIndex)
+	public List<Text> render(IElementContainer context)
 	{
 		List<Text> result = new ArrayList<>();
-		String baseCommand = menu.getCommand() + elementIndex + " ";
+		String baseCommand = context.getCommand(this);
 		
 		for(int y = 0; y < 20; y++)
 		{
@@ -107,7 +107,7 @@ public class ImageElement extends Element
 		return result;
 	}
 	
-	public void edit(ChatMenu menu, String[] args)
+	public void edit(IElementContainer container, String[] args)
 	{
 		int index = Integer.parseInt(args[0]);
 		colors[index] = onPixelClick(index / 20, index % 20, colors[index]);

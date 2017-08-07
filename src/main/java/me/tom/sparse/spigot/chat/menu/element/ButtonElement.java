@@ -2,6 +2,7 @@ package me.tom.sparse.spigot.chat.menu.element;
 
 import me.tom.sparse.spigot.chat.menu.ChatMenu;
 import me.tom.sparse.spigot.chat.menu.ChatMenuAPI;
+import me.tom.sparse.spigot.chat.menu.IElementContainer;
 import me.tom.sparse.spigot.chat.util.Text;
 import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.ClickEvent;
@@ -107,9 +108,9 @@ public class ButtonElement extends Element
 		return true;
 	}
 	
-	public List<Text> render(ChatMenu menu, int elementIndex)
+	public List<Text> render(IElementContainer context)
 	{
-		String baseCommand = menu.getCommand() + elementIndex + " ";
+		String baseCommand = context.getCommand(this);
 		
 		BaseComponent[] components = TextComponent.fromLegacyText(text);
 		ClickEvent click = new ClickEvent(ClickEvent.Action.RUN_COMMAND, baseCommand);
@@ -119,13 +120,13 @@ public class ButtonElement extends Element
 		return Collections.singletonList(new Text(components));
 	}
 	
-	public boolean onClick(ChatMenu menu, Player player)
+	public boolean onClick(IElementContainer container, Player player)
 	{
-		super.onClick(menu, player);
+		super.onClick(container, player);
 		return callback == null ? false : callback.apply(player);
 	}
 	
-	public void edit(ChatMenu menu, String[] args)
+	public void edit(IElementContainer container, String[] args)
 	{
 	}
 }
