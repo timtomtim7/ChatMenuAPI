@@ -104,7 +104,7 @@ public class BooleanElement extends Element
 	
 	public int getWidth()
 	{
-		return 8 + (showText ? ChatMenuAPI.getWidth(" " + value) : 0);
+		return 8 + (showText ? ChatMenuAPI.getWidth(" " + value.current()) : 0);
 	}
 	
 	public int getHeight()

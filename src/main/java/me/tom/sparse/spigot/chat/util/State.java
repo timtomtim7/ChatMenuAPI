@@ -83,4 +83,27 @@ public class State<V>
 	{
 		this.changeCallback = changeCallback;
 	}
+	
+	public boolean equals(Object o)
+	{
+		if(this == o) return true;
+		if(!(o instanceof State)) return false;
+		
+		State<?> state = (State<?>) o;
+		
+		return current != null ? current.equals(state.current) : state.current == null;
+	}
+	
+	public int hashCode()
+	{
+		return current != null ? current.hashCode() : 0;
+	}
+	
+	public String toString()
+	{
+		return "State{" +
+				"current=" + current +
+				", previous=" + previous +
+				'}';
+	}
 }
