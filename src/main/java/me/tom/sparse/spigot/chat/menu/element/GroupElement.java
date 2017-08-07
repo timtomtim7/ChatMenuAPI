@@ -14,6 +14,7 @@ public class GroupElement extends Element implements IElementContainer
 	/**
 	 * Constructs an element at the given x and y coordinates.
 	 *
+	 * @param parent The parent element of this group. Usually a {@code ChatMenu} or another {@code GroupElement}
 	 * @param x the x coordinate to put this element at
 	 * @param y the y coordinate to put this element at
 	 */
