@@ -42,4 +42,9 @@ public interface IElementContainer
 	 * @param player the player to open this container for
 	 */
 	void openFor(Player player);
+	
+	/**
+	 * Displays this container again to all of the players currently viewing it
+	 */
+	void refresh();
 }

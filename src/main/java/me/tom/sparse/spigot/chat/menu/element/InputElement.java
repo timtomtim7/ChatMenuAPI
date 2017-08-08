@@ -101,7 +101,7 @@ public class InputElement extends Element
 			CMListener.expectPlayerChat(player, (p, m) -> {
 				editing = false;
 				setValue(m);
-				container.openFor(p);
+				container.refresh();
 				return true;
 			});
 		}else

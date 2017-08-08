@@ -79,6 +79,14 @@ public class ChatMenu implements IElementContainer
 	}
 	
 	/**
+	 * @param autoUnregister true if this menu should automatically be unregistered after all players close it.
+	 */
+	public void setAutoUnregister(boolean autoUnregister)
+	{
+		this.autoUnregister = autoUnregister;
+	}
+	
+	/**
 	 * Adds the provided element to this menu.
 	 *
 	 * @param element the element to add to this menu
@@ -140,7 +148,7 @@ public class ChatMenu implements IElementContainer
 		Element element = elements.get(elementIndex);
 		element.edit(this, args);
 		if(element.onClick(this, player))
-			openFor(player);
+			refresh();
 	}
 	
 	/**
@@ -156,6 +164,16 @@ public class ChatMenu implements IElementContainer
 		for(BaseComponent[] line : build())
 			chat.sendMessage(line);
 		ChatMenuAPI.setCurrentMenu(player, this);
+	}
+	
+	/**
+	 * Sends this menu again to all of the players currently viewing it
+	 */
+	public void refresh()
+	{
+		viewers.removeIf(it -> !it.isOnline());
+		for(Player viewer : viewers)
+			openFor(viewer);
 	}
 
 	@Nonnull

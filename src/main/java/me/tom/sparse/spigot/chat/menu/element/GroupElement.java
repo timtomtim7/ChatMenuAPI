@@ -136,4 +136,9 @@ public class GroupElement extends Element implements IElementContainer
 	{
 		parent.openFor(player);
 	}
+	
+	public void refresh()
+	{
+		parent.refresh();
+	}
 }

@@ -17,10 +17,7 @@ import java.util.stream.Collectors;
 @Deprecated
 public class ImageElement extends Element
 {
-	public static final List<ChatColor> COLORS = Collections.unmodifiableList(
-			Arrays.stream(ChatColor.values())
-					.filter(c -> c != ChatColor.BOLD && c != ChatColor.MAGIC && c != ChatColor.UNDERLINE && c != ChatColor.ITALIC && c != ChatColor.STRIKETHROUGH && c != ChatColor.RESET).collect(Collectors.toList())
-	);
+	public static final List<ChatColor> COLORS = Collections.unmodifiableList(Arrays.stream(org.bukkit.ChatColor.values()).filter(org.bukkit.ChatColor::isColor).map(org.bukkit.ChatColor::asBungee).collect(Collectors.toList()));
 
 	protected int[] colors = new int[20 * 20];
 	protected PixelClickCallback callback;
