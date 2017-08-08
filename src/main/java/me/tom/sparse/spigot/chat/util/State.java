@@ -42,7 +42,7 @@ public class State<V>
 	}
 	
 	/**
-	 * Sets the getCurrent value if the provided value is not {@link Object#equals} to the old one, then calls the {@code changeCallback}.
+	 * Sets the current value if the provided value is not {@link Object#equals} to the old one, then calls the {@code changeCallback}.
 	 *
 	 * @param newValue the new value
 	 */
@@ -61,7 +61,7 @@ public class State<V>
 	}
 	
 	/**
-	 * @return the getCurrent value. Might be {@code null}.
+	 * @return the current value. Might be {@code null}.
 	 */
 	@Nullable
 	public V getCurrent()

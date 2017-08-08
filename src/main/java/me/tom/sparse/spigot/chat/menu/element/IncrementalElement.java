@@ -100,7 +100,7 @@ public class IncrementalElement extends Element
 	}
 	
 	/**
-	 * @return the getCurrent value
+	 * @return the current value
 	 */
 	public int getValue()
 	{

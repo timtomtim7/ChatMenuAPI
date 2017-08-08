@@ -134,7 +134,7 @@ public class TextElement extends Element
 	}
 	
 	/**
-	 * @return the getCurrent text alignment
+	 * @return the current text alignment
 	 */
 	@Nonnull
 	public TextAlignment getAlignment()

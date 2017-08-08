@@ -25,7 +25,7 @@ public final class ChatMenuAPI
 	private ChatMenuAPI() {}
 	
 	/**
-	 * @param player the player whose getCurrent menu should be returned
+	 * @param player the player whose current menu should be returned
 	 * @return the menu the player currently has open, or {@code null} if no menu is open.
 	 */
 	@Nullable
@@ -35,11 +35,10 @@ public final class ChatMenuAPI
 	}
 	
 	/**
-	 * @param player the player whose getCurrent menu should be setCurrent
-	 * @param menu   the menu to setCurrent as getCurrent, or {@code null} if you want to close the getCurrent menu.
+	 * @param player the player whose current menu should be returned
+	 * @param menu   the menu to set as current, or {@code null} if you want to close the current menu.
 	 */
-	@Nullable
-	public static void setCurrentMenu(@Nonnull Player player, @Nonnull ChatMenu menu)
+	public static void setCurrentMenu(@Nonnull Player player, @Nullable ChatMenu menu)
 	{
 		ChatMenu old = OPENED_MENUS.remove(player);
 		if(old != null && old != menu) old.onClosed(player);
@@ -73,7 +72,7 @@ public final class ChatMenuAPI
 	}
 	
 	/**
-	 * Gets the getCurrent {@link PlayerChatIntercept} associated with the provided player.
+	 * Gets the current {@link PlayerChatIntercept} associated with the provided player.
 	 * If the player does not have one, it will be created.
 	 *
 	 * @param player the player to get/create the {@link PlayerChatIntercept} for

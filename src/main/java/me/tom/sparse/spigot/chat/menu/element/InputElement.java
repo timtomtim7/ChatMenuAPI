@@ -38,7 +38,7 @@ public class InputElement extends Element
 	}
 	
 	/**
-	 * @return the getCurrent value
+	 * @return the current value
 	 */
 	@Nullable
 	public String getValue()

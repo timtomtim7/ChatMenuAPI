@@ -211,7 +211,7 @@ public abstract class Element
 	}
 	
 	/**
-	 * @param context the getCurrent render context
+	 * @param context the current render context
 	 * @return the rendered text
 	 */
 	public abstract List<Text> render(IElementContainer context);

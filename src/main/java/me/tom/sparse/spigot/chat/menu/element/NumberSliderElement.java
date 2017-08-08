@@ -111,7 +111,7 @@ public class NumberSliderElement extends Element
 	}
 	
 	/**
-	 * @return the getCurrent number format
+	 * @return the current number format
 	 */
 	@Nonnull
 	public NumberFormat getNumberFormat()
@@ -213,7 +213,7 @@ public class NumberSliderElement extends Element
 	}
 	
 	/**
-	 * Sets the length of this (based on the getCurrent precision) to attempt to make the width match as closely as possible to the target width.
+	 * Sets the length of this (based on the current precision) to attempt to make the width match as closely as possible to the target width.
 	 *
 	 * @param width the width to attempt to match
 	 */
@@ -224,7 +224,7 @@ public class NumberSliderElement extends Element
 	}
 	
 	/**
-	 * Sets the length of this (based on the getCurrent precision) to attempt to make the width match as closely as possible to the target width.
+	 * Sets the length of this (based on the current precision) to attempt to make the width match as closely as possible to the target width.
 	 *
 	 * @param width the width to attempt to match
 	 * @return this
@@ -237,7 +237,7 @@ public class NumberSliderElement extends Element
 	}
 	
 	/**
-	 * @return the getCurrent value
+	 * @return the current value
 	 */
 	public int getValue()
 	{
@@ -253,7 +253,7 @@ public class NumberSliderElement extends Element
 	}
 	
 	/**
-	 * @return the bar character used based on the getCurrent precision
+	 * @return the bar character used based on the current precision
 	 */
 	public char getCharacter()
 	{

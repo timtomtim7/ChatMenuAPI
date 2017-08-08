@@ -147,7 +147,7 @@ public class BooleanElement extends Element
 	}
 	
 	/**
-	 * @return the getCurrent value
+	 * @return the current value
 	 */
 	@Nonnull
 	public boolean getValue()
