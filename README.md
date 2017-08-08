@@ -72,8 +72,8 @@ Most interactive elements have one or more `State` objects.
 Every state can have a change callback to detect when it changes:
 ```Java
 IncrementalElement incr = ...;
-incr.value.onChange((s) -> {
-	System.out.println("IncrementalElement changed! "+s.previous()+" -> "+s.current());
+incr.value.setChangeCallback((s) -> {
+	System.out.println("IncrementalElement changed! "+s.getPrevious()+" -> "+s.getCurrent());
 });
 ```
 
