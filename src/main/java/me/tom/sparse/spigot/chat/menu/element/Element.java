@@ -6,6 +6,8 @@ import me.tom.sparse.spigot.chat.util.Text;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -13,7 +15,8 @@ import java.util.List;
 public abstract class Element
 {
 	protected int x, y;
-	
+
+	@Nullable
 	protected Sound clickSound  = Sound.UI_BUTTON_CLICK;
 	protected float clickVolume = 0.5f;
 	protected float clickPitch  = 1;
@@ -67,6 +70,7 @@ public abstract class Element
 	/**
 	 * @return the sound played when a player clicks this element
 	 */
+	@Nullable
 	public Sound getClickSound()
 	{
 		return clickSound;
@@ -76,16 +80,20 @@ public abstract class Element
 	 * Sets the sound and the volume and pitch of the sound played when a player clicks this element.
 	 *
 	 * @param clickSound the new sound
-	 * @param volume     the volume of the sound
-	 * @param pitch      the pitch of the sound
 	 */
-	public void setClickSound(Sound clickSound, float volume, float pitch)
+	public void setClickSound(@Nonnull Sound clickSound)
 	{
 		this.clickSound = clickSound;
-		this.clickVolume = volume;
-		this.clickPitch = pitch;
 	}
-	
+
+	public void setClickVolume(float clickVolume) {
+		this.clickVolume = clickVolume;
+	}
+
+	public void setClickPitch(float clickPitch) {
+		this.clickPitch = clickPitch;
+	}
+
 	/**
 	 * @return the x coordinate of the left-most part of this element
 	 */
@@ -172,7 +180,7 @@ public abstract class Element
 	 * @param other the element to detect collision with
 	 * @return true of the elements overlap
 	 */
-	public final boolean overlaps(Element other)
+	public final boolean overlaps(@Nonnull Element other)
 	{
 		if(other == this)
 			return false;
@@ -203,7 +211,7 @@ public abstract class Element
 	}
 	
 	/**
-	 * @param context the current render context
+	 * @param context the getCurrent render context
 	 * @return the rendered text
 	 */
 	public abstract List<Text> render(IElementContainer context);
@@ -217,7 +225,7 @@ public abstract class Element
 	 * @param player the player that clicked this element
 	 * @return true if the menu should rebuild and resend
 	 */
-	public boolean onClick(IElementContainer container, Player player)
+	public boolean onClick(@Nonnull IElementContainer container, @Nonnull Player player)
 	{
 		if(clickSound != null)
 			player.playSound(player.getEyeLocation(), clickSound, clickVolume, clickPitch);
@@ -229,11 +237,12 @@ public abstract class Element
 	 *  @param container the container this element is being edited on
 	 * @param args the data to be parsed
 	 */
-	public abstract void edit(IElementContainer container, String[] args);
+	public abstract void edit(@Nonnull IElementContainer container, @Nonnull String[] args);
 	
 	/**
 	 * @return an unmodifiable {@link java.util.Collection} of all the states in this element.
 	 */
+	@Nonnull
 	public Collection<State<?>> getStates()
 	{
 		return Collections.emptyList();

@@ -9,6 +9,7 @@ import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.TextComponent;
 
+import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -18,6 +19,7 @@ import java.util.List;
  */
 public class IncrementalElement extends Element
 {
+	@Nonnull
 	public final State<Integer> value;
 	protected int min = Integer.MIN_VALUE, max = Integer.MAX_VALUE;
 	
@@ -70,7 +72,7 @@ public class IncrementalElement extends Element
 	public void setMin(int min)
 	{
 		this.min = min;
-		value.set(value.current());
+		value.setCurrent(value.getCurrent());
 	}
 	
 	/**
@@ -94,20 +96,20 @@ public class IncrementalElement extends Element
 	 */
 	public void setValue(int value)
 	{
-		this.value.set(value);
+		this.value.setCurrent(value);
 	}
 	
 	/**
-	 * @return the current value
+	 * @return the getCurrent value
 	 */
 	public int getValue()
 	{
-		return value.current();
+		return value.getCurrent();
 	}
 	
 	public int getWidth()
 	{
-		return ChatMenuAPI.getWidth("[-] " + value.current() + " [+]");
+		return ChatMenuAPI.getWidth("[-] " + value.getCurrent() + " [+]");
 	}
 	
 	public int getHeight()
@@ -119,14 +121,15 @@ public class IncrementalElement extends Element
 	{
 		return true;
 	}
-	
-	public List<Text> render(IElementContainer context)
+
+	@Nonnull
+	public List<Text> render(@Nonnull IElementContainer context)
 	{
 		String baseCommand = context.getCommand(this);
 		
 		List<BaseComponent> components = new ArrayList<>();
 		TextComponent decrement = new TextComponent("[-]");
-		int current = value.current();
+		int current = value.getCurrent();
 		if(current - 1 >= min)
 		{
 			decrement.setColor(ChatColor.RED);
@@ -155,11 +158,12 @@ public class IncrementalElement extends Element
 		return Collections.singletonList(new Text(components));
 	}
 	
-	public void edit(IElementContainer container, String[] args)
+	public void edit(@Nonnull IElementContainer container, @Nonnull String[] args)
 	{
-		value.set(Integer.parseInt(args[0]));
+		value.setCurrent(Integer.parseInt(args[0]));
 	}
 	
+	@Nonnull
 	public List<State<?>> getStates()
 	{
 		return Collections.singletonList(value);

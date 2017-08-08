@@ -7,6 +7,7 @@ import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.TextComponent;
 
+import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -15,22 +16,8 @@ import java.util.List;
 @Deprecated
 public class ImageElement extends Element
 {
-	public static final List<ChatColor> COLORS = Collections.unmodifiableList(Arrays.asList(
-			ChatColor.WHITE,
-			ChatColor.DARK_RED,
-			ChatColor.RED,
-			ChatColor.GOLD,
-			ChatColor.YELLOW,
-			ChatColor.GREEN,
-			ChatColor.DARK_GREEN,
-			ChatColor.DARK_AQUA,
-			ChatColor.BLUE,
-			ChatColor.DARK_BLUE,
-			ChatColor.DARK_PURPLE,
-			ChatColor.LIGHT_PURPLE,
-			ChatColor.BLACK
-	));
-	
+	public static final List<ChatColor> COLORS = Collections.unmodifiableList(Arrays.asList(ChatColor.values()));
+
 	protected int[] colors = new int[20 * 20];
 	protected PixelClickCallback callback;
 	
@@ -107,7 +94,7 @@ public class ImageElement extends Element
 		return result;
 	}
 	
-	public void edit(IElementContainer container, String[] args)
+	public void edit(@Nonnull IElementContainer container, @Nonnull String[] args)
 	{
 		int index = Integer.parseInt(args[0]);
 		colors[index] = onPixelClick(index / 20, index % 20, colors[index]);

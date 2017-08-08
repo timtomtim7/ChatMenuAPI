@@ -9,6 +9,7 @@ import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.TextComponent;
 
+import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -19,13 +20,16 @@ import java.util.List;
 public class VerticalSelectorElement extends Element
 {
 	protected static final int SELECTED_PREFIX_WIDTH = ChatMenuAPI.getWidth("> ");
-	
+
+	@Nonnull
 	protected String[] options;
 	protected int      width;
 	
 	//	protected int selectedIndex;
+	@Nonnull
 	public final State<Integer> value;
-	
+
+	@Nonnull
 	protected ChatColor selectedColor = ChatColor.GREEN;
 	
 	/**
@@ -36,7 +40,7 @@ public class VerticalSelectorElement extends Element
 	 * @param defaultSelected the selected option index
 	 * @param options         the list of options. Options may not contain {@code \n}
 	 */
-	public VerticalSelectorElement(int x, int y, int defaultSelected, String... options)
+	public VerticalSelectorElement(int x, int y, int defaultSelected, @Nonnull String... options)
 	{
 		super(x, y);
 		for(String option : options)
@@ -61,7 +65,7 @@ public class VerticalSelectorElement extends Element
 	/**
 	 * @param selectedColor the new color for the selected element. Can be {@code null}
 	 */
-	public void setSelectedColor(ChatColor selectedColor)
+	public void setSelectedColor(@Nonnull ChatColor selectedColor)
 	{
 		this.selectedColor = selectedColor;
 	}
@@ -69,6 +73,7 @@ public class VerticalSelectorElement extends Element
 	/**
 	 * @return the color for the selected element
 	 */
+	@Nonnull
 	public ChatColor getSelectedColor()
 	{
 		return selectedColor;
@@ -79,7 +84,7 @@ public class VerticalSelectorElement extends Element
 	 */
 	public void setSelectedIndex(int value)
 	{
-		this.value.set(value);
+		this.value.setCurrent(value);
 	}
 	
 	/**
@@ -87,7 +92,7 @@ public class VerticalSelectorElement extends Element
 	 */
 	public int getSelectedIndex()
 	{
-		return value.current();
+		return value.getCurrent();
 	}
 	
 	/**
@@ -95,7 +100,7 @@ public class VerticalSelectorElement extends Element
 	 */
 	public String getSelectedOption()
 	{
-		int selectedIndex = value.current();
+		int selectedIndex = value.getCurrent();
 		return selectedIndex >= 0 && selectedIndex < options.length ? options[selectedIndex] : null;
 	}
 	
@@ -124,7 +129,7 @@ public class VerticalSelectorElement extends Element
 			Text text = new Text();
 			BaseComponent[] components = TextComponent.fromLegacyText(options[i]);
 			
-			if(i == value.current())
+			if(i == value.getCurrent())
 			{
 				text.append("> ");
 				if(selectedColor != null)
@@ -143,11 +148,12 @@ public class VerticalSelectorElement extends Element
 		return result;
 	}
 	
-	public void edit(IElementContainer container, String[] args)
+	public void edit(@Nonnull IElementContainer container, @Nonnull String[] args)
 	{
-		value.set(Integer.parseInt(args[0]));
+		value.setCurrent(Integer.parseInt(args[0]));
 	}
 	
+	@Nonnull
 	public List<State<?>> getStates()
 	{
 		return Collections.singletonList(value);

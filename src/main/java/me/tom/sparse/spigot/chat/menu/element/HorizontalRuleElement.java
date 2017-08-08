@@ -5,13 +5,14 @@ import me.tom.sparse.spigot.chat.menu.IElementContainer;
 import me.tom.sparse.spigot.chat.util.Text;
 import me.tom.sparse.spigot.chat.util.TextUtil;
 
+import javax.annotation.Nonnull;
 import java.util.Collections;
 import java.util.List;
 
 public class HorizontalRuleElement extends Element
 {
-	private static final String text  = "\u00a7m" + TextUtil.generateWidth(' ', 320, false);
-	public static final  int    WIDTH = ChatMenuAPI.getWidth(text);
+	private static final String TEXT = "\u00a7m" + TextUtil.generateWidth(' ', 320, false);
+	public static final  int    WIDTH = ChatMenuAPI.getWidth(TEXT);
 	
 	/**
 	 * Constructs an element at the given x and y coordinates.
@@ -35,10 +36,10 @@ public class HorizontalRuleElement extends Element
 	
 	public List<Text> render(IElementContainer context)
 	{
-		return Collections.singletonList(new Text(text));
+		return Collections.singletonList(new Text(TEXT));
 	}
 	
-	public void edit(IElementContainer container, String[] args)
+	public void edit(@Nonnull IElementContainer container, @Nonnull String[] args)
 	{
 	
 	}

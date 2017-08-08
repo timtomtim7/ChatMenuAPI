@@ -8,6 +8,8 @@ import org.bukkit.map.MapFont;
 import org.bukkit.map.MinecraftFont;
 import org.bukkit.plugin.Plugin;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ThreadLocalRandom;
@@ -23,37 +25,41 @@ public final class ChatMenuAPI
 	private ChatMenuAPI() {}
 	
 	/**
-	 * @param player the player whose current menu should be returned
+	 * @param player the player whose getCurrent menu should be returned
 	 * @return the menu the player currently has open, or {@code null} if no menu is open.
 	 */
-	public static ChatMenu getCurrentMenu(Player player)
+	@Nullable
+	public static ChatMenu getCurrentMenu(@Nonnull Player player)
 	{
 		return OPENED_MENUS.get(player);
 	}
 	
 	/**
-	 * @param player the player whose current menu should be set
-	 * @param menu   the menu to set as current, or {@code null} if you want to close the current menu.
+	 * @param player the player whose getCurrent menu should be setCurrent
+	 * @param menu   the menu to setCurrent as getCurrent, or {@code null} if you want to close the getCurrent menu.
 	 */
-	public static void setCurrentMenu(Player player, ChatMenu menu)
+	@Nullable
+	public static void setCurrentMenu(@Nonnull Player player, @Nonnull ChatMenu menu)
 	{
 		ChatMenu old = OPENED_MENUS.remove(player);
 		if(old != null && old != menu) old.onClosed(player);
 		if(menu != null) OPENED_MENUS.put(player, menu);
 	}
-	
+
+	@Nonnull
 	static String registerMenu(ChatMenu menu)
 	{
 		String id = generateIdentifier();
 		MENUS.put(id, menu);
 		return id;
 	}
-	
-	static void unregisterMenu(ChatMenu menu)
+
+	static void unregisterMenu(@Nonnull ChatMenu menu)
 	{
 		MENUS.values().remove(menu);
 	}
-	
+
+	@Nonnull
 	private static String generateIdentifier()
 	{
 		String result = null;
@@ -67,13 +73,14 @@ public final class ChatMenuAPI
 	}
 	
 	/**
-	 * Gets the current {@link PlayerChatIntercept} associated with the provided player.
+	 * Gets the getCurrent {@link PlayerChatIntercept} associated with the provided player.
 	 * If the player does not have one, it will be created.
 	 *
 	 * @param player the player to get/create the {@link PlayerChatIntercept} for
 	 * @return the {@link PlayerChatIntercept} associated with the provided player
 	 */
-	public static PlayerChatIntercept getChatIntercept(Player player)
+	@Nonnull
+	public static PlayerChatIntercept getChatIntercept(@Nonnull Player player)
 	{
 		return interceptor.getChat(player);
 	}
@@ -86,7 +93,7 @@ public final class ChatMenuAPI
 	 * @param text the text to calculate the width for
 	 * @return the number of pixels in chat the text takes up
 	 */
-	public static int getWidth(String text)
+	public static int getWidth(@Nonnull String text)
 	{
 		if(text.contains("\n"))
 			throw new IllegalArgumentException("Cannot get width of text containing newline");
@@ -169,7 +176,7 @@ public final class ChatMenuAPI
 	 *
 	 * @param plugin the plugin to initialize everything with, including listeners and scheduled tasks
 	 */
-	public static void init(Plugin plugin)
+	public static void init(@Nonnull Plugin plugin)
 	{
 		if(ChatMenuAPI.plugin != null)
 			return;

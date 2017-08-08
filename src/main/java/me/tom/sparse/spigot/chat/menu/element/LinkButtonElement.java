@@ -7,6 +7,7 @@ import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.TextComponent;
 
+import javax.annotation.Nonnull;
 import java.util.Collections;
 import java.util.List;
 
@@ -15,7 +16,9 @@ import java.util.List;
  */
 public class LinkButtonElement extends Element
 {
+	@Nonnull
 	protected String text;
+	@Nonnull
 	protected String link;
 	
 	/**
@@ -25,8 +28,9 @@ public class LinkButtonElement extends Element
 	 * @param y    the y coordinate
 	 * @param text the text to display
 	 * @param link the link
+	 * @throws IllegalArgumentException if text contains newlines
 	 */
-	public LinkButtonElement(int x, int y, String text, String link)
+	public LinkButtonElement(int x, int y, @Nonnull String text, @Nonnull String link)
 	{
 		super(x, y);
 		if(text.contains("\n"))
@@ -38,6 +42,7 @@ public class LinkButtonElement extends Element
 	/**
 	 * @return the text that displays for this button
 	 */
+	@Nonnull
 	public String getText()
 	{
 		return text;
@@ -46,7 +51,7 @@ public class LinkButtonElement extends Element
 	/**
 	 * @param text the new text to display
 	 */
-	public void setText(String text)
+	public void setText(@Nonnull String text)
 	{
 		if(text.contains("\n"))
 			throw new IllegalArgumentException("Button text cannot contain newline");
@@ -56,6 +61,7 @@ public class LinkButtonElement extends Element
 	/**
 	 * @return the link
 	 */
+	@Nonnull
 	public String getLink()
 	{
 		return link;
@@ -64,7 +70,7 @@ public class LinkButtonElement extends Element
 	/**
 	 * @param link the new link
 	 */
-	public void setLink(String link)
+	public void setLink(@Nonnull String link)
 	{
 		this.link = link;
 	}
@@ -89,7 +95,7 @@ public class LinkButtonElement extends Element
 		return Collections.singletonList(new Text(components));
 	}
 	
-	public void edit(IElementContainer container, String[] args)
+	public void edit(@Nonnull IElementContainer container, @Nonnull String[] args)
 	{
 	}
 }
