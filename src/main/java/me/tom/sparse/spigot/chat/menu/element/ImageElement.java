@@ -12,11 +12,15 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Deprecated
 public class ImageElement extends Element
 {
-	public static final List<ChatColor> COLORS = Collections.unmodifiableList(Arrays.asList(ChatColor.values()));
+	public static final List<ChatColor> COLORS = Collections.unmodifiableList(
+			Arrays.stream(ChatColor.values())
+            .filter(c -> c != ChatColor.BOLD && c != ChatColor.MAGIC && c != ChatColor.UNDERLINE && c != ChatColor.ITALIC && c != ChatColor.STRIKETHROUGH).collect(Collectors.toList())
+	);
 
 	protected int[] colors = new int[20 * 20];
 	protected PixelClickCallback callback;
