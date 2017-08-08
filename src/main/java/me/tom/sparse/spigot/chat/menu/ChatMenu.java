@@ -211,9 +211,8 @@ public class ChatMenu implements IElementContainer
 		return result;
 	}
 
-	//FIXME: Javadocs unclear. says would return true, but return type isn't a boolean
 	/**
-	 * @return true if any elements overlap
+	 * @return the first element found that overlaps
 	 */
 	@Nullable
 	public Element findOverlap()
@@ -330,11 +329,5 @@ public class ChatMenu implements IElementContainer
 		ChatMenu chatMenu = (ChatMenu) o;
 		
 		return id.equals(chatMenu.id);
-	}
-
-	//FIXME: Redundant
-	public ChatMenu getMenu()
-	{
-		return this;
 	}
 }

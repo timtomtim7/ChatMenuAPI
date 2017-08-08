@@ -73,9 +73,10 @@ public class InputElement extends Element
 	{
 		ClickEvent click = new ClickEvent(ClickEvent.Action.RUN_COMMAND, context.getCommand(this));
 		
-		boolean tooLong = ChatMenuAPI.getWidth(value.getCurrent()) > width;
+		String current = value.getOptionalCurrent().orElse("");
+		boolean tooLong = ChatMenuAPI.getWidth(current) > width;
 		
-		Text text = new Text(tooLong ? "Too long" : value.getCurrent());
+		Text text = new Text(tooLong ? "Too long" : current);
 		text.expandToWidth(width);
 		text.getComponents().forEach(it -> {
 			if(tooLong)

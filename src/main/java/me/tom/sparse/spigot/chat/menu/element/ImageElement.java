@@ -19,7 +19,7 @@ public class ImageElement extends Element
 {
 	public static final List<ChatColor> COLORS = Collections.unmodifiableList(
 			Arrays.stream(ChatColor.values())
-            .filter(c -> c != ChatColor.BOLD && c != ChatColor.MAGIC && c != ChatColor.UNDERLINE && c != ChatColor.ITALIC && c != ChatColor.STRIKETHROUGH).collect(Collectors.toList())
+					.filter(c -> c != ChatColor.BOLD && c != ChatColor.MAGIC && c != ChatColor.UNDERLINE && c != ChatColor.ITALIC && c != ChatColor.STRIKETHROUGH && c != ChatColor.RESET).collect(Collectors.toList())
 	);
 
 	protected int[] colors = new int[20 * 20];

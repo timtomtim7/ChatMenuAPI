@@ -3,6 +3,7 @@ package me.tom.sparse.spigot.chat.util;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
@@ -10,6 +11,7 @@ public class State<V>
 {
 	private Consumer<State<V>> changeCallback;
 	
+	@Nonnull
 	private Function<V, V> valueFilter;
 
 	@Nullable
@@ -25,10 +27,10 @@ public class State<V>
 	 * @param current     the starting value
 	 * @param valueFilter the filter for every value
 	 */
-	public State(@Nonnull V current, Function<V, V> valueFilter)
+	public State(@Nullable V current, @Nullable Function<V, V> valueFilter)
 	{
-		this.valueFilter = valueFilter;
-		this.current = valueFilter.apply(current);
+		this.valueFilter = valueFilter == null ? v -> v : valueFilter;
+		this.current = this.valueFilter.apply(current);
 	}
 	
 	/**
@@ -36,7 +38,7 @@ public class State<V>
 	 *
 	 * @param current the starting value
 	 */
-	public State(@Nonnull V current)
+	public State(@Nullable V current)
 	{
 		this(current, v -> v);
 	}
@@ -46,7 +48,7 @@ public class State<V>
 	 *
 	 * @param newValue the new value
 	 */
-	public void setCurrent(@Nonnull V newValue)
+	public void setCurrent(@Nullable V newValue)
 	{
 		newValue = valueFilter.apply(newValue);
 		
@@ -58,6 +60,22 @@ public class State<V>
 		
 		if(changeCallback != null)
 			changeCallback.accept(this);
+	}
+	
+	/**
+	 * @return the current value as an {@link java.util.Optional}
+	 */
+	public Optional<V> getOptionalCurrent()
+	{
+		return Optional.ofNullable(current);
+	}
+	
+	/**
+	 * @return the previous value as an {@link java.util.Optional}
+	 */
+	public Optional<V> getOptionalPrevious()
+	{
+		return Optional.ofNullable(previous);
 	}
 	
 	/**
@@ -85,7 +103,7 @@ public class State<V>
 	 *
 	 * @param changeCallback the new change callback.
 	 */
-	public void setOnChange(@Nonnull Consumer<State<V>> changeCallback)
+	public void setChangeCallback(@Nonnull Consumer<State<V>> changeCallback)
 	{
 		this.changeCallback = changeCallback;
 	}
@@ -108,8 +126,8 @@ public class State<V>
 	public String toString()
 	{
 		return "State{" +
-				"getCurrent=" + current +
-				", getPrevious=" + previous +
+				"current=" + current +
+				", previous=" + previous +
 				'}';
 	}
 }

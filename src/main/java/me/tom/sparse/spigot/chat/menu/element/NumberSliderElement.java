@@ -241,7 +241,7 @@ public class NumberSliderElement extends Element
 	 */
 	public int getValue()
 	{
-		return value.getCurrent();
+		return value.getOptionalCurrent().orElse(0);
 	}
 	
 	/**
@@ -272,7 +272,7 @@ public class NumberSliderElement extends Element
 	
 	private String getFormattedNumber()
 	{
-		return numberFormat == null ? "" : " " + numberFormat.format(value.getCurrent(), length);
+		return " " + numberFormat.format(getValue(), length);
 	}
 	
 	public int getHeight()
@@ -289,7 +289,7 @@ public class NumberSliderElement extends Element
 		{
 //			double v = (double) (i + 1) / (double) length;
 			TextComponent c = new TextComponent(String.valueOf((char) ('\u2588' + precision)));
-			c.setColor(i <= value.getCurrent() ? isEnabled() ? fullColor : ChatColor.GRAY : isEnabled() ? emptyColor : ChatColor.DARK_GRAY);
+			c.setColor(i <= getValue() ? isEnabled() ? fullColor : ChatColor.GRAY : isEnabled() ? emptyColor : ChatColor.DARK_GRAY);
 			c.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, baseCommand + i));
 			components.add(c);
 		}

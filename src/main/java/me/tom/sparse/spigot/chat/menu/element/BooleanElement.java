@@ -20,7 +20,6 @@ import java.util.List;
  */
 public class BooleanElement extends Element
 {
-	//	protected boolean value;
 	@Nonnull
 	public final State<Boolean> value;
 
@@ -89,7 +88,6 @@ public class BooleanElement extends Element
 	/**
 	 * @param falseColor the color the symbol should be if the value is {@code false}
 	 */
-	//TODO: Annotate @Nonnull and get rid of default colour?
 	public void setFalseColor(@Nullable ChatColor falseColor)
 	{
 		this.falseColor = falseColor == null ? ChatColor.RED : falseColor;
@@ -107,7 +105,6 @@ public class BooleanElement extends Element
 	/**
 	 * @param trueColor The color the symbol should be if the value is {@code true}
 	 */
-	//TODO: Same as above
 	public void setTrueColor(@Nullable ChatColor trueColor)
 	{
 		this.trueColor = trueColor == null ? ChatColor.GREEN : trueColor;
@@ -129,7 +126,7 @@ public class BooleanElement extends Element
 		String baseCommand = context.getCommand(this);
 		
 		List<BaseComponent> components = new ArrayList<>();
-		boolean current = value.getCurrent();
+		boolean current = value.getOptionalCurrent().orElse(false);
 		TextComponent c = new TextComponent(current ? "\u2714" : "\u2718");
 		c.setColor(current ? trueColor : falseColor);
 		c.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, baseCommand + !current));
@@ -149,10 +146,9 @@ public class BooleanElement extends Element
 	/**
 	 * @return the current value
 	 */
-	@Nonnull
 	public boolean getValue()
 	{
-		return value.getCurrent();
+		return value.getOptionalCurrent().orElse(false);
 	}
 	
 	/**

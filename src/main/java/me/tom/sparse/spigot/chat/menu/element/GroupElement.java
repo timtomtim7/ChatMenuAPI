@@ -29,12 +29,10 @@ public class GroupElement extends Element implements IElementContainer
 	}
 	
 	/**
-	 * Adds the provided element to this group.
 	 *
-	 * @param element the element to add to this menu
-	 * @param <T>     the type of element
-	 * @return the element added
-	 * @throws NullPointerException if the element is null
+	 * @param element the element to add
+	 * @param <T> the type of element to add
+	 * @return the element that was added
 	 */
 	public <T extends Element> T add(@Nonnull T element)
 	{
@@ -63,8 +61,11 @@ public class GroupElement extends Element implements IElementContainer
 	{
 		return Collections.unmodifiableList(elements);
 	}
-
-	//TODO: Documentation?
+	
+	/**
+	 * @param element the element to interact with
+	 * @return the command used to interact with this element
+	 */
 	@Nonnull
 	public String getCommand(@Nonnull Element element)
 	{
@@ -135,29 +136,4 @@ public class GroupElement extends Element implements IElementContainer
 	{
 		parent.openFor(player);
 	}
-	
-	//	public static class GroupElementContainer implements IElementContainer
-//	{
-//		private final IElementContainer parent;
-//		private final GroupElement      group;
-//
-//		private GroupElementContainer(IElementContainer parent, GroupElement group)
-//		{
-//			this.parent = parent;
-//			this.group = group;
-//		}
-//
-//		public String getCommand(Element element)
-//		{
-//			int i = group.elements.indexOf(element);
-//			if(i == -1)
-//				throw new IllegalArgumentException("Unable to interact with the provided element");
-//			return parent.getCommand(group) + i + " ";
-//		}
-//
-//		public ChatMenu getMenu()
-//		{
-//			return parent.getMenu();
-//		}
-//	}
 }

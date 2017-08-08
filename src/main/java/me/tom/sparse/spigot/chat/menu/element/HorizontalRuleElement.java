@@ -11,22 +11,36 @@ import java.util.List;
 
 public class HorizontalRuleElement extends Element
 {
-	private static final String TEXT = "\u00a7m" + TextUtil.generateWidth(' ', 320, false);
-	public static final  int    WIDTH = ChatMenuAPI.getWidth(TEXT);
+	private final String text;
+	private final int    width;
 	
 	/**
-	 * Constructs an element at the given x and y coordinates.
+	 * Constructs a {@code HorizontalRuleElement} at the provided Y coordinate and a width of {@code 320} (default chat width).
 	 *
 	 * @param y the y coordinate to put this element at
 	 */
 	public HorizontalRuleElement(int y)
 	{
-		super(0, y);
+		this(0, y, 320);
+	}
+	
+	/**
+	 * Constructs a {@code HorizontalRuleElement}.
+	 *
+	 * @param x     the x coordinate to put this element at
+	 * @param y     the y coordinate to put this element at
+	 * @param width the width of this element
+	 */
+	public HorizontalRuleElement(int x, int y, int width)
+	{
+		super(x, y);
+		this.text = "\u00a7m" + TextUtil.generateWidth(' ', width, false);
+		this.width = ChatMenuAPI.getWidth(text);
 	}
 	
 	public int getWidth()
 	{
-		return WIDTH;
+		return width;
 	}
 	
 	public int getHeight()
@@ -36,7 +50,7 @@ public class HorizontalRuleElement extends Element
 	
 	public List<Text> render(IElementContainer context)
 	{
-		return Collections.singletonList(new Text(TEXT));
+		return Collections.singletonList(new Text(text));
 	}
 	
 	public void edit(@Nonnull IElementContainer container, @Nonnull String[] args)

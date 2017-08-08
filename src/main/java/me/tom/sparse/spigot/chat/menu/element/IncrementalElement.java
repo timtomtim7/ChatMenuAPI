@@ -104,7 +104,7 @@ public class IncrementalElement extends Element
 	 */
 	public int getValue()
 	{
-		return value.getCurrent();
+		return value.getOptionalCurrent().orElse(0);
 	}
 	
 	public int getWidth()
@@ -129,7 +129,7 @@ public class IncrementalElement extends Element
 		
 		List<BaseComponent> components = new ArrayList<>();
 		TextComponent decrement = new TextComponent("[-]");
-		int current = value.getCurrent();
+		int current = value.getOptionalCurrent().orElse(0);
 		if(current - 1 >= min)
 		{
 			decrement.setColor(ChatColor.RED);

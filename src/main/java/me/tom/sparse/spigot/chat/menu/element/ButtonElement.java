@@ -57,7 +57,8 @@ public class ButtonElement extends Element
 	public ButtonElement(int x, int y, @Nonnull String text, @Nullable Consumer<Player> callback)
 	{
 		this(x, y, text, player -> {
-			callback.accept(player);
+			if(callback != null)
+				callback.accept(player);
 			return true;
 		});
 	}

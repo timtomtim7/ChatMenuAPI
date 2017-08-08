@@ -10,6 +10,7 @@ import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.TextComponent;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -28,8 +29,8 @@ public class VerticalSelectorElement extends Element
 	//	protected int selectedIndex;
 	@Nonnull
 	public final State<Integer> value;
-
-	@Nonnull
+	
+	@Nullable
 	protected ChatColor selectedColor = ChatColor.GREEN;
 	
 	/**
@@ -65,7 +66,7 @@ public class VerticalSelectorElement extends Element
 	/**
 	 * @param selectedColor the new color for the selected element. Can be {@code null}
 	 */
-	public void setSelectedColor(@Nonnull ChatColor selectedColor)
+	public void setSelectedColor(@Nullable ChatColor selectedColor)
 	{
 		this.selectedColor = selectedColor;
 	}
@@ -73,7 +74,7 @@ public class VerticalSelectorElement extends Element
 	/**
 	 * @return the color for the selected element
 	 */
-	@Nonnull
+	@Nullable
 	public ChatColor getSelectedColor()
 	{
 		return selectedColor;
@@ -92,7 +93,7 @@ public class VerticalSelectorElement extends Element
 	 */
 	public int getSelectedIndex()
 	{
-		return value.getCurrent();
+		return value.getOptionalCurrent().orElse(0);
 	}
 	
 	/**
@@ -100,7 +101,7 @@ public class VerticalSelectorElement extends Element
 	 */
 	public String getSelectedOption()
 	{
-		int selectedIndex = value.getCurrent();
+		int selectedIndex = getSelectedIndex();
 		return selectedIndex >= 0 && selectedIndex < options.length ? options[selectedIndex] : null;
 	}
 	
@@ -129,7 +130,7 @@ public class VerticalSelectorElement extends Element
 			Text text = new Text();
 			BaseComponent[] components = TextComponent.fromLegacyText(options[i]);
 			
-			if(i == value.getCurrent())
+			if(i == getSelectedIndex())
 			{
 				text.append("> ");
 				if(selectedColor != null)
