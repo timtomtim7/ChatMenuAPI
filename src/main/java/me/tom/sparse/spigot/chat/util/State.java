@@ -1,5 +1,7 @@
 package me.tom.sparse.spigot.chat.util;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.util.Objects;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -9,19 +11,21 @@ public class State<V>
 	private Consumer<State<V>> changeCallback;
 	
 	private Function<V, V> valueFilter;
-	
+
+	@Nullable
 	private V current;
+	@Nullable
 	private V previous;
 	
 	/**
 	 * Constructs a new {@code State} with the provided value and the provided value filter.
 	 * <br>
-	 * The value filter will replace the value every time {@link State#set} is called.
+	 * The value filter will replace the value every time {@link State#setCurrent} is called.
 	 *
 	 * @param current     the starting value
 	 * @param valueFilter the filter for every value
 	 */
-	public State(V current, Function<V, V> valueFilter)
+	public State(@Nonnull V current, Function<V, V> valueFilter)
 	{
 		this.valueFilter = valueFilter;
 		this.current = valueFilter.apply(current);
@@ -32,7 +36,7 @@ public class State<V>
 	 *
 	 * @param current the starting value
 	 */
-	public State(V current)
+	public State(@Nonnull V current)
 	{
 		this(current, v -> v);
 	}
@@ -42,7 +46,7 @@ public class State<V>
 	 *
 	 * @param newValue the new value
 	 */
-	public void set(V newValue)
+	public void setCurrent(@Nonnull V newValue)
 	{
 		newValue = valueFilter.apply(newValue);
 		
@@ -59,15 +63,17 @@ public class State<V>
 	/**
 	 * @return the current value. Might be {@code null}.
 	 */
-	public V current()
+	@Nullable
+	public V getCurrent()
 	{
 		return current;
 	}
 	
 	/**
-	 * @return the previous value. Might be {@code null}.
+	 * @return the getPrevious value. Might be {@code null}.
 	 */
-	public V previous()
+	@Nullable
+	public V getPrevious()
 	{
 		return previous;
 	}
@@ -75,11 +81,11 @@ public class State<V>
 	/**
 	 * Sets the change callback. Every time this {@code State} changes, the provided callback will be called.
 	 * <br>
-	 * Replaces any previously set change callbacks.
+	 * Replaces any previously setCurrent change callbacks.
 	 *
 	 * @param changeCallback the new change callback.
 	 */
-	public void onChange(Consumer<State<V>> changeCallback)
+	public void setOnChange(@Nonnull Consumer<State<V>> changeCallback)
 	{
 		this.changeCallback = changeCallback;
 	}
@@ -102,8 +108,8 @@ public class State<V>
 	public String toString()
 	{
 		return "State{" +
-				"current=" + current +
-				", previous=" + previous +
+				"getCurrent=" + current +
+				", getPrevious=" + previous +
 				'}';
 	}
 }

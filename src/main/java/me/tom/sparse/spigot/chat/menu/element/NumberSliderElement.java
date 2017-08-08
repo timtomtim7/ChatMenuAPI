@@ -11,6 +11,8 @@ import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.entity.Player;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -19,13 +21,17 @@ public class NumberSliderElement extends Element
 {
 	public static final int MIN_PRECISION = 0;
 	public static final int MAX_PRECISION = 7;
-	
+
+	@Nonnull
 	public final State<Integer> value;
 	protected    int            length;
-	
+
+	@Nonnull
 	protected ChatColor fullColor  = ChatColor.GREEN;
+	@Nonnull
 	protected ChatColor emptyColor = ChatColor.RED;
-	
+
+	@Nonnull
 	protected NumberFormat numberFormat = NumberFormat.PERCENTAGE;
 	
 	protected int precision = 6;
@@ -54,7 +60,7 @@ public class NumberSliderElement extends Element
 	 * @param value  the number of bars that are full
 	 * @param format the format for the number
 	 */
-	public NumberSliderElement(int x, int y, int length, int value, NumberFormat format)
+	public NumberSliderElement(int x, int y, int length, int value, @Nullable NumberFormat format)
 	{
 		super(x, y);
 		this.length = length;
@@ -74,7 +80,8 @@ public class NumberSliderElement extends Element
 	 * @param emptyColor the color for all of the empty bars
 	 * @return this
 	 */
-	public NumberSliderElement colors(ChatColor fullColor, ChatColor emptyColor)
+	@Nonnull
+	public NumberSliderElement colors(@Nonnull ChatColor fullColor, @Nonnull ChatColor emptyColor)
 	{
 		setFullColor(fullColor);
 		setEmptyColor(emptyColor);
@@ -97,7 +104,7 @@ public class NumberSliderElement extends Element
 	 * @param format the new number format
 	 * @return this
 	 */
-	public NumberSliderElement numberFormat(NumberFormat format)
+	public NumberSliderElement numberFormat(@Nullable NumberFormat format)
 	{
 		setNumberFormat(format);
 		return this;
@@ -106,6 +113,7 @@ public class NumberSliderElement extends Element
 	/**
 	 * @return the current number format
 	 */
+	@Nonnull
 	public NumberFormat getNumberFormat()
 	{
 		return numberFormat;
@@ -114,7 +122,7 @@ public class NumberSliderElement extends Element
 	/**
 	 * @param format the new number format
 	 */
-	public void setNumberFormat(NumberFormat format)
+	public void setNumberFormat(@Nullable NumberFormat format)
 	{
 		this.numberFormat = format == null ? NumberFormat.NONE : format;
 	}
@@ -157,6 +165,7 @@ public class NumberSliderElement extends Element
 	/**
 	 * @return the color for all of the empty bars
 	 */
+	@Nonnull
 	public ChatColor getEmptyColor()
 	{
 		return emptyColor;
@@ -165,7 +174,7 @@ public class NumberSliderElement extends Element
 	/**
 	 * @param emptyColor the new color for all of the empty bars
 	 */
-	public void setEmptyColor(ChatColor emptyColor)
+	public void setEmptyColor(@Nullable ChatColor emptyColor)
 	{
 		this.emptyColor = emptyColor == null ? ChatColor.RED : emptyColor;
 	}
@@ -173,6 +182,7 @@ public class NumberSliderElement extends Element
 	/**
 	 * @return the color for all of the full bars
 	 */
+	@Nonnull
 	public ChatColor getFullColor()
 	{
 		return fullColor;
@@ -181,7 +191,7 @@ public class NumberSliderElement extends Element
 	/**
 	 * @param fullColor the new color for all of the full bars
 	 */
-	public void setFullColor(ChatColor fullColor)
+	public void setFullColor(@Nullable ChatColor fullColor)
 	{
 		this.fullColor = fullColor == null ? ChatColor.GREEN : fullColor;
 	}
@@ -219,6 +229,7 @@ public class NumberSliderElement extends Element
 	 * @param width the width to attempt to match
 	 * @return this
 	 */
+	@Nonnull
 	public NumberSliderElement width(int width)
 	{
 		setWidth(width);
@@ -230,7 +241,7 @@ public class NumberSliderElement extends Element
 	 */
 	public int getValue()
 	{
-		return value.current();
+		return value.getCurrent();
 	}
 	
 	/**
@@ -238,7 +249,7 @@ public class NumberSliderElement extends Element
 	 */
 	public void setValue(int value)
 	{
-		this.value.set(value);
+		this.value.setCurrent(value);
 	}
 	
 	/**
@@ -261,14 +272,14 @@ public class NumberSliderElement extends Element
 	
 	private String getFormattedNumber()
 	{
-		return numberFormat == null ? "" : " " + numberFormat.format(value.current(), length);
+		return numberFormat == null ? "" : " " + numberFormat.format(value.getCurrent(), length);
 	}
 	
 	public int getHeight()
 	{
 		return 1;
 	}
-	
+
 	public List<Text> render(IElementContainer context)
 	{
 		String baseCommand = context.getCommand(this);
@@ -278,7 +289,7 @@ public class NumberSliderElement extends Element
 		{
 //			double v = (double) (i + 1) / (double) length;
 			TextComponent c = new TextComponent(String.valueOf((char) ('\u2588' + precision)));
-			c.setColor(i <= value.current() ? isEnabled() ? fullColor : ChatColor.GRAY : isEnabled() ? emptyColor : ChatColor.DARK_GRAY);
+			c.setColor(i <= value.getCurrent() ? isEnabled() ? fullColor : ChatColor.GRAY : isEnabled() ? emptyColor : ChatColor.DARK_GRAY);
 			c.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, baseCommand + i));
 			components.add(c);
 		}
@@ -292,18 +303,19 @@ public class NumberSliderElement extends Element
 		return true;
 	}
 	
-	public boolean onClick(IElementContainer container, Player player)
+	public boolean onClick(@Nonnull IElementContainer container, @Nonnull Player player)
 	{
 		return isEnabled() && super.onClick(container, player);
 	}
 	
-	public void edit(IElementContainer container, String[] args)
+	public void edit(@Nonnull IElementContainer container, @Nonnull String[] args)
 	{
 		if(!isEnabled())
 			return;
-		value.set(Integer.parseInt(args[0]));
+		value.setCurrent(Integer.parseInt(args[0]));
 	}
 	
+	@Nonnull
 	public List<State<?>> getStates()
 	{
 		return Collections.singletonList(value);

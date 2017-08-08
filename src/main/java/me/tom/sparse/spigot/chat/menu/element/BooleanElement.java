@@ -9,6 +9,8 @@ import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.TextComponent;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -19,9 +21,12 @@ import java.util.List;
 public class BooleanElement extends Element
 {
 	//	protected boolean value;
+	@Nonnull
 	public final State<Boolean> value;
-	
+
+	@Nonnull
 	protected ChatColor trueColor  = ChatColor.GREEN;
+	@Nonnull
 	protected ChatColor falseColor = ChatColor.RED;
 	
 	protected boolean showText = false;
@@ -44,6 +49,7 @@ public class BooleanElement extends Element
 	 *
 	 * @return this
 	 */
+	@Nonnull
 	public BooleanElement showText()
 	{
 		setShowText(true);
@@ -63,7 +69,8 @@ public class BooleanElement extends Element
 	 * @param falseColor The color the symbol should be if the value is {@code false}
 	 * @return this
 	 */
-	public BooleanElement colors(ChatColor trueColor, ChatColor falseColor)
+	@Nonnull
+	public BooleanElement colors(@Nonnull ChatColor trueColor, @Nonnull ChatColor falseColor)
 	{
 		setTrueColor(trueColor);
 		setFalseColor(falseColor);
@@ -73,6 +80,7 @@ public class BooleanElement extends Element
 	/**
 	 * @return the color the text will be if the value is {@code false}
 	 */
+	@Nonnull
 	public ChatColor getFalseColor()
 	{
 		return falseColor;
@@ -81,7 +89,8 @@ public class BooleanElement extends Element
 	/**
 	 * @param falseColor the color the symbol should be if the value is {@code false}
 	 */
-	public void setFalseColor(ChatColor falseColor)
+	//TODO: Annotate @Nonnull and get rid of default colour?
+	public void setFalseColor(@Nullable ChatColor falseColor)
 	{
 		this.falseColor = falseColor == null ? ChatColor.RED : falseColor;
 	}
@@ -89,6 +98,7 @@ public class BooleanElement extends Element
 	/**
 	 * @return the color the text will be if the value is {@code true}
 	 */
+	@Nonnull
 	public ChatColor getTrueColor()
 	{
 		return trueColor;
@@ -97,27 +107,29 @@ public class BooleanElement extends Element
 	/**
 	 * @param trueColor The color the symbol should be if the value is {@code true}
 	 */
-	public void setTrueColor(ChatColor trueColor)
+	//TODO: Same as above
+	public void setTrueColor(@Nullable ChatColor trueColor)
 	{
 		this.trueColor = trueColor == null ? ChatColor.GREEN : trueColor;
 	}
 	
 	public int getWidth()
 	{
-		return 8 + (showText ? ChatMenuAPI.getWidth(" " + value.current()) : 0);
+		return 8 + (showText ? ChatMenuAPI.getWidth(" " + value.getCurrent()) : 0);
 	}
 	
 	public int getHeight()
 	{
 		return 1;
 	}
-	
-	public List<Text> render(IElementContainer context)
+
+	@Nonnull
+	public List<Text> render(@Nonnull IElementContainer context)
 	{
 		String baseCommand = context.getCommand(this);
 		
 		List<BaseComponent> components = new ArrayList<>();
-		boolean current = value.current();
+		boolean current = value.getCurrent();
 		TextComponent c = new TextComponent(current ? "\u2714" : "\u2718");
 		c.setColor(current ? trueColor : falseColor);
 		c.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, baseCommand + !current));
@@ -129,17 +141,18 @@ public class BooleanElement extends Element
 		return Collections.singletonList(new Text(components));
 	}
 	
-	public void edit(IElementContainer container, String[] args)
+	public void edit(@Nonnull IElementContainer container, @Nonnull String[] args)
 	{
-		value.set(Boolean.parseBoolean(args[0]));
+		value.setCurrent(Boolean.parseBoolean(args[0]));
 	}
 	
 	/**
 	 * @return the current value
 	 */
+	@Nonnull
 	public boolean getValue()
 	{
-		return value.current();
+		return value.getCurrent();
 	}
 	
 	/**
@@ -147,9 +160,10 @@ public class BooleanElement extends Element
 	 */
 	public void setValue(boolean value)
 	{
-		this.value.set(value);
+		this.value.setCurrent(value);
 	}
-	
+
+	@Nonnull
 	public List<State<?>> getStates()
 	{
 		return Collections.singletonList(value);
