@@ -43,10 +43,16 @@
             <version>1.12-R0.1-SNAPSHOT</version>
         </dependency>
         <dependency>
-            <groupId>org.spigotmc</groupId>
-            <artifactId>spigot</artifactId>
-            <version>1.12-R0.1-SNAPSHOT</version>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-all</artifactId> <!-- Use 'netty-all' for 4.0 or above -->
+            <version>4.0.23.Final</version>
+            <scope>compile</scope>
         </dependency>
+        <!--<dependency>-->
+        <!--<groupId>org.spigotmc</groupId>-->
+        <!--<artifactId>spigot</artifactId>-->
+        <!--<version>1.12-R0.1-SNAPSHOT</version>-->
+        <!--</dependency>-->
         <dependency>
             <groupId>com.google.code.findbugs</groupId>
             <artifactId>jsr305</artifactId>
