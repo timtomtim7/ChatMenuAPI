@@ -29,7 +29,7 @@ Add `ChatMenuAPI.jar` to your build path, then add it as a dependency in your `p
 depend: [ChatMenuAPI]
 ```
 ### ChatMenu
-To create a menu, just create a new instance of `ChatMenu`:
+To create a menu, just create a new instance of `me.tom.sparse.spigot.chat.menu.ChatMenu`:
 ```Java
 ChatMenu menu = new ChatMenu();
 ```
@@ -52,12 +52,12 @@ menu.add(new TextElement("Hello, world!", 10, 10));
 
 Basic close button:
 ```Java
-menu.add(new ButtonElement(x, y, ChatColor.RED+"[Close]", (p) -> {menu.close(p); return false;}));
+menu.add(new ButtonElement(x, y, ChatColor.RED + "[Close]", player -> { menu.close(player); return false; }));
 ```
 
 Instead of manually creating a close button, you can also just pass the arguments you would use for a close button directly into the `pauseChat` method.
 ```Java
-ChatMenu menu = new ChatMenu().pauseChat(x, y, ChatColor.RED+"[Close]");
+ChatMenu menu = new ChatMenu().pauseChat(x, y, ChatColor.RED + "[Close]");
 ```
 
 All of the default elements require and X and Y in their constructor, 
@@ -67,22 +67,22 @@ The default Minecraft chat is 320 pixels wide and 20 lines tall.
 ### States
 Most interactive elements have one or more `State` objects.
 
-`State`s are used to store information about an `Element`, such as the current number in an `IncrementalElement`.
+States are used to store information about an `Element`, such as the current number in an `IncrementalElement`.
 
 Every state can have a change callback to detect when it changes:
 ```Java
 IncrementalElement incr = ...;
-incr.value.setChangeCallback((s) -> {
-	System.out.println("IncrementalElement changed! "+s.getPrevious()+" -> "+s.getCurrent());
+incr.value.setChangeCallback(state -> {
+	System.out.println("IncrementalElement changed! " + state.getPrevious() + " -> " + state.getCurrent());
 });
 ```
 
 ### Displaying
 Once you've created your menu and added all the elements you want, now would probably be a good time to display it.
-You can display a menu using `ChatMenu#openFor(Player player)`:
+You can display a menu using `ChatMenu#openFor(org.bukkit.entity.Player)`:
 ```Java
-Player p = ...;
-menu.openFor(p);
+Player player = ...;
+menu.openFor(player);
 ```
 
 ## Links
