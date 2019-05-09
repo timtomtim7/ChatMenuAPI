@@ -4,8 +4,8 @@ import me.tom.sparse.spigot.chat.menu.ChatMenuAPI;
 import me.tom.sparse.spigot.chat.menu.IElementContainer;
 import me.tom.sparse.spigot.chat.util.Text;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,11 +16,11 @@ public class TextElement extends Element
 {
 	protected static final int BORDER_WIDTH = ChatMenuAPI.getWidth("|  |");
 
-	@Nonnull
+	@NotNull
 	protected String[] lines;
 	protected int      width;
 
-	@Nonnull
+	@NotNull
 	protected TextAlignment alignment = TextAlignment.LEFT;
 	protected boolean border;
 	
@@ -31,7 +31,7 @@ public class TextElement extends Element
 	 * @param x    the x coordinate
 	 * @param y    the y coordinate
 	 */
-	public TextElement(@Nonnull String text, int x, int y)
+	public TextElement(@NotNull String text, int x, int y)
 	{
 		super(x, y);
 		
@@ -57,7 +57,7 @@ public class TextElement extends Element
 	 * @param y    the y coordinate
 	 * @param text the lines of text. Lines may not contain {@code \n}
 	 */
-	public TextElement(int x, int y, @Nonnull String... text)
+	public TextElement(int x, int y, @NotNull String... text)
 	{
 		super(x, y);
 		
@@ -77,7 +77,7 @@ public class TextElement extends Element
 		setLines(text.split("\n"));
 	}
 	
-	public void setLines(@Nonnull String... lines)
+	public void setLines(@NotNull String... lines)
 	{
 		int newWidth = 0;
 		for(String line : lines)
@@ -97,7 +97,7 @@ public class TextElement extends Element
 	 *
 	 * @return this
 	 */
-	@Nonnull
+	@NotNull
 	public TextElement border()
 	{
 		this.border = true;
@@ -126,8 +126,8 @@ public class TextElement extends Element
 	 * @param alignment the new text alignment
 	 * @return this
 	 */
-	@Nonnull
-	public TextElement align(@Nonnull TextAlignment alignment)
+	@NotNull
+	public TextElement align(@NotNull TextAlignment alignment)
 	{
 		setAlignment(alignment);
 		return this;
@@ -136,7 +136,7 @@ public class TextElement extends Element
 	/**
 	 * @return the current text alignment
 	 */
-	@Nonnull
+	@NotNull
 	public TextAlignment getAlignment()
 	{
 		return alignment;
@@ -249,7 +249,7 @@ public class TextElement extends Element
 		return result;
 	}
 	
-	public void edit(@Nonnull IElementContainer container, @Nonnull String[] args)
+	public void edit(@NotNull IElementContainer container, @NotNull String[] args)
 	{
 	
 	}

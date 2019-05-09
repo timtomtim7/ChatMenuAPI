@@ -7,7 +7,7 @@ import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.TextComponent;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 import java.util.Collections;
 import java.util.List;
 
@@ -16,9 +16,9 @@ import java.util.List;
  */
 public class LinkButtonElement extends Element
 {
-	@Nonnull
+	@NotNull
 	protected String text;
-	@Nonnull
+	@NotNull
 	protected String link;
 	
 	/**
@@ -30,7 +30,7 @@ public class LinkButtonElement extends Element
 	 * @param link the link
 	 * @throws IllegalArgumentException if text contains newlines
 	 */
-	public LinkButtonElement(int x, int y, @Nonnull String text, @Nonnull String link)
+	public LinkButtonElement(int x, int y, @NotNull String text, @NotNull String link)
 	{
 		super(x, y);
 		if(text.contains("\n"))
@@ -42,7 +42,7 @@ public class LinkButtonElement extends Element
 	/**
 	 * @return the text that displays for this button
 	 */
-	@Nonnull
+	@NotNull
 	public String getText()
 	{
 		return text;
@@ -51,7 +51,7 @@ public class LinkButtonElement extends Element
 	/**
 	 * @param text the new text to display
 	 */
-	public void setText(@Nonnull String text)
+	public void setText(@NotNull String text)
 	{
 		if(text.contains("\n"))
 			throw new IllegalArgumentException("Button text cannot contain newline");
@@ -61,7 +61,7 @@ public class LinkButtonElement extends Element
 	/**
 	 * @return the link
 	 */
-	@Nonnull
+	@NotNull
 	public String getLink()
 	{
 		return link;
@@ -70,7 +70,7 @@ public class LinkButtonElement extends Element
 	/**
 	 * @param link the new link
 	 */
-	public void setLink(@Nonnull String link)
+	public void setLink(@NotNull String link)
 	{
 		this.link = link;
 	}
@@ -95,7 +95,7 @@ public class LinkButtonElement extends Element
 		return Collections.singletonList(new Text(components));
 	}
 	
-	public void edit(@Nonnull IElementContainer container, @Nonnull String[] args)
+	public void edit(@NotNull IElementContainer container, @NotNull String[] args)
 	{
 	}
 }

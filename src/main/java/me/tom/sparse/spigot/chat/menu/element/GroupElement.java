@@ -4,14 +4,14 @@ import me.tom.sparse.spigot.chat.menu.IElementContainer;
 import me.tom.sparse.spigot.chat.util.Text;
 import org.bukkit.entity.Player;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 import java.util.*;
 
 public class GroupElement extends Element implements IElementContainer
 {
-	@Nonnull
+	@NotNull
 	protected final IElementContainer parent;
-	@Nonnull
+	@NotNull
 	protected       List<Element>     elements;
 	
 	/**
@@ -21,7 +21,7 @@ public class GroupElement extends Element implements IElementContainer
 	 * @param x the x coordinate to put this element at
 	 * @param y the y coordinate to put this element at
 	 */
-	public GroupElement(@Nonnull IElementContainer parent, int x, int y)
+	public GroupElement(@NotNull IElementContainer parent, int x, int y)
 	{
 		super(x, y);
 		this.parent = parent;
@@ -34,7 +34,7 @@ public class GroupElement extends Element implements IElementContainer
 	 * @param <T> the type of element to add
 	 * @return the element that was added
 	 */
-	public <T extends Element> T add(@Nonnull T element)
+	public <T extends Element> T add(@NotNull T element)
 	{
 		Objects.requireNonNull(element);
 		elements.add(element);
@@ -48,7 +48,7 @@ public class GroupElement extends Element implements IElementContainer
 	 * @param element the element to remove
 	 * @return true if the element was removed
 	 */
-	public boolean remove(@Nonnull Element element)
+	public boolean remove(@NotNull Element element)
 	{
 		return elements.remove(element);
 	}
@@ -56,7 +56,7 @@ public class GroupElement extends Element implements IElementContainer
 	/**
 	 * @return an unmodifiable list of all the elements in this group.
 	 */
-	@Nonnull
+	@NotNull
 	public List<Element> getElements()
 	{
 		return Collections.unmodifiableList(elements);
@@ -66,8 +66,8 @@ public class GroupElement extends Element implements IElementContainer
 	 * @param element the element to interact with
 	 * @return the command used to interact with this element
 	 */
-	@Nonnull
-	public String getCommand(@Nonnull Element element)
+	@NotNull
+	public String getCommand(@NotNull Element element)
 	{
 		int index = elements.indexOf(element);
 		if(index == -1)
@@ -89,8 +89,8 @@ public class GroupElement extends Element implements IElementContainer
 		return furthest.getBottom();
 	}
 
-	@Nonnull
-	public List<Text> render(@Nonnull IElementContainer context)
+	@NotNull
+	public List<Text> render(@NotNull IElementContainer context)
 	{
 		if(context != parent)
 			throw new IllegalStateException("Attempted to render GroupElement with non-parent context");
@@ -124,7 +124,7 @@ public class GroupElement extends Element implements IElementContainer
 		return lines;
 	}
 
-	public void edit(@Nonnull IElementContainer container, @Nonnull String[] args)
+	public void edit(@NotNull IElementContainer container, @NotNull String[] args)
 	{
 		int index = Integer.parseInt(args[0]);
 		String[] newArgs = new String[args.length - 1];
@@ -132,7 +132,7 @@ public class GroupElement extends Element implements IElementContainer
 		elements.get(index).edit(container, newArgs);
 	}
 	
-	public void openFor(@Nonnull Player player)
+	public void openFor(@NotNull Player player)
 	{
 		parent.openFor(player);
 	}

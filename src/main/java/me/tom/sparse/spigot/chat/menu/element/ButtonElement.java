@@ -9,8 +9,8 @@ import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.entity.Player;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import java.util.Collections;
 import java.util.List;
 import java.util.function.Consumer;
@@ -21,7 +21,7 @@ import java.util.function.Function;
  */
 public class ButtonElement extends Element
 {
-	public static ButtonElement createCloseButton(int x, int y, @Nonnull String text, @Nonnull ChatMenu menu)
+	public static ButtonElement createCloseButton(int x, int y, @NotNull String text, @NotNull ChatMenu menu)
 	{
 		return new ButtonElement(x, y, text, (p) -> {
 			menu.close(p);
@@ -29,7 +29,7 @@ public class ButtonElement extends Element
 		});
 	}
 
-	@Nonnull
+	@NotNull
 	protected String                    text;
 	@Nullable
 	protected Function<Player, Boolean> callback;
@@ -41,7 +41,7 @@ public class ButtonElement extends Element
 	 * @param y    the y coordinate
 	 * @param text the text
 	 */
-	public ButtonElement(int x, int y, @Nonnull String text)
+	public ButtonElement(int x, int y, @NotNull String text)
 	{
 		this(x, y, text, (Function<Player, Boolean>) null);
 	}
@@ -54,7 +54,7 @@ public class ButtonElement extends Element
 	 * @param text     the text
 	 * @param callback the callback to be called when the button is clicked.
 	 */
-	public ButtonElement(int x, int y, @Nonnull String text, @Nullable Consumer<Player> callback)
+	public ButtonElement(int x, int y, @NotNull String text, @Nullable Consumer<Player> callback)
 	{
 		this(x, y, text, player -> {
 			if(callback != null)
@@ -71,7 +71,7 @@ public class ButtonElement extends Element
 	 * @param text     the text
 	 * @param callback the callback to be called when the button is clicked. Should return {@code true} to automatically resend the menu.
 	 */
-	public ButtonElement(int x, int y, @Nonnull String text, @Nullable Function<Player, Boolean> callback)
+	public ButtonElement(int x, int y, @NotNull String text, @Nullable Function<Player, Boolean> callback)
 	{
 		super(x, y);
 		if(text.contains("\n"))
@@ -83,7 +83,7 @@ public class ButtonElement extends Element
 	/**
 	 * @return the text this button displays
 	 */
-	@Nonnull
+	@NotNull
 	public String getText()
 	{
 		return text;
@@ -93,7 +93,7 @@ public class ButtonElement extends Element
 	 * @param text the new text this button should display
 	 * @throws IllegalArgumentException if text contains a newline.
 	 */
-	public void setText(@Nonnull String text)
+	public void setText(@NotNull String text)
 	{
 		if(text.contains("\n"))
 			throw new IllegalArgumentException("Button text cannot contain newline");
@@ -115,8 +115,8 @@ public class ButtonElement extends Element
 		return true;
 	}
 
-	@Nonnull
-	public List<Text> render(@Nonnull IElementContainer context)
+	@NotNull
+	public List<Text> render(@NotNull IElementContainer context)
 	{
 		String baseCommand = context.getCommand(this);
 		
@@ -128,13 +128,13 @@ public class ButtonElement extends Element
 		return Collections.singletonList(new Text(components));
 	}
 	
-	public boolean onClick(@Nonnull IElementContainer container, @Nonnull Player player)
+	public boolean onClick(@NotNull IElementContainer container, @NotNull Player player)
 	{
 		super.onClick(container, player);
 		return callback == null ? false : callback.apply(player);
 	}
 	
-	public void edit(@Nonnull IElementContainer container, @Nonnull String[] args)
+	public void edit(@NotNull IElementContainer container, @NotNull String[] args)
 	{
 	}
 }
