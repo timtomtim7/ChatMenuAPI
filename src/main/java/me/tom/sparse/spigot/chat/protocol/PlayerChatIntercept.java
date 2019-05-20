@@ -50,7 +50,6 @@ public class PlayerChatIntercept extends ChannelDuplexHandler
 		if(isPaused())
 			return;
 		paused = true;
-		System.out.println("Pausing chat for " + player.getName());
 		allowedMessages = new ConcurrentLinkedQueue<>();
 	}
 	
@@ -59,7 +58,6 @@ public class PlayerChatIntercept extends ChannelDuplexHandler
 		if(!isPaused())
 			return;
 		paused = false;
-		System.out.println("Resuming chat for " + player.getName());
 		
 		allowedMessages = null;
 		Queue<BaseComponent[]> q = new ConcurrentLinkedQueue<>(messageQueue);
