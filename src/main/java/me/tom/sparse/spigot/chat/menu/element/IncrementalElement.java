@@ -9,7 +9,7 @@ import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.TextComponent;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -19,7 +19,7 @@ import java.util.List;
  */
 public class IncrementalElement extends Element
 {
-	@Nonnull
+	@NotNull
 	public final State<Integer> value;
 	protected int min = Integer.MIN_VALUE, max = Integer.MAX_VALUE;
 	
@@ -122,8 +122,8 @@ public class IncrementalElement extends Element
 		return true;
 	}
 
-	@Nonnull
-	public List<Text> render(@Nonnull IElementContainer context)
+	@NotNull
+	public List<Text> render(@NotNull IElementContainer context)
 	{
 		String baseCommand = context.getCommand(this);
 		
@@ -158,12 +158,12 @@ public class IncrementalElement extends Element
 		return Collections.singletonList(new Text(components));
 	}
 	
-	public void edit(@Nonnull IElementContainer container, @Nonnull String[] args)
+	public void edit(@NotNull IElementContainer container, @NotNull String[] args)
 	{
 		value.setCurrent(Integer.parseInt(args[0]));
 	}
 	
-	@Nonnull
+	@NotNull
 	public List<State<?>> getStates()
 	{
 		return Collections.singletonList(value);

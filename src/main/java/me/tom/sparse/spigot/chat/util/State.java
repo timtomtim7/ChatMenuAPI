@@ -1,7 +1,7 @@
 package me.tom.sparse.spigot.chat.util;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Consumer;
@@ -11,7 +11,7 @@ public class State<V>
 {
 	private Consumer<State<V>> changeCallback;
 	
-	@Nonnull
+	@NotNull
 	private Function<V, V> valueFilter;
 
 	@Nullable
@@ -103,7 +103,7 @@ public class State<V>
 	 *
 	 * @param changeCallback the new change callback.
 	 */
-	public void setChangeCallback(@Nonnull Consumer<State<V>> changeCallback)
+	public void setChangeCallback(@NotNull Consumer<State<V>> changeCallback)
 	{
 		this.changeCallback = changeCallback;
 	}

@@ -8,20 +8,20 @@ import me.tom.sparse.spigot.chat.util.Text;
 import net.md_5.bungee.api.chat.BaseComponent;
 import org.bukkit.entity.Player;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import java.util.*;
 
 public class ChatMenu implements IElementContainer
 {
-	@Nonnull
+	@NotNull
 	protected final String  id;
 	protected       boolean registered;
 
-	@Nonnull
+	@NotNull
 	protected List<Element> elements;
 
-	@Nonnull
+	@NotNull
 	protected Set<Player> viewers   = new ConcurrentSet<>();
 	protected boolean     pauseChat = false;
 	
@@ -32,7 +32,7 @@ public class ChatMenu implements IElementContainer
 	 *
 	 * @param elements the elements to start the menu with.
 	 */
-	public ChatMenu(@Nonnull Element... elements)
+	public ChatMenu(@NotNull Element... elements)
 	{
 		this(Arrays.asList(elements));
 	}
@@ -42,7 +42,7 @@ public class ChatMenu implements IElementContainer
 	 *
 	 * @param elements the elements to start the menu with.
 	 */
-	public ChatMenu(@Nonnull Collection<Element> elements)
+	public ChatMenu(@NotNull Collection<Element> elements)
 	{
 		this.elements = new ArrayList<>();
 		this.elements.addAll(elements);
@@ -93,7 +93,7 @@ public class ChatMenu implements IElementContainer
 	 * @throws IllegalArgumentException if the element is null
 	 */
 	@Deprecated
-	public void addElement(@Nonnull Element element)
+	public void addElement(@NotNull Element element)
 	{
 		add(element);
 	}
@@ -105,7 +105,7 @@ public class ChatMenu implements IElementContainer
 	 * @param <T> the type of element
 	 * @return the element added
 	 */
-	public <T extends Element> T add(@Nonnull T t)
+	public <T extends Element> T add(@NotNull T t)
 	{
 		Objects.requireNonNull(t);
 		elements.add(t);
@@ -119,7 +119,7 @@ public class ChatMenu implements IElementContainer
 	 * @param element the element to remove
 	 * @return true if the element was removed
 	 */
-	public boolean remove(@Nonnull Element element)
+	public boolean remove(@NotNull Element element)
 	{
 		return elements.remove(element);
 	}
@@ -127,7 +127,7 @@ public class ChatMenu implements IElementContainer
 	/**
 	 * @return an unmodifiable list of all the elements in this menu.
 	 */
-	@Nonnull
+	@NotNull
 	public List<Element> getElements()
 	{
 		return Collections.unmodifiableList(elements);
@@ -140,7 +140,7 @@ public class ChatMenu implements IElementContainer
 	 * @param elementIndex the index of the element that was edited
 	 * @param args         the data to be parsed by the element
 	 */
-	public void edit(@Nonnull Player player, int elementIndex, @Nonnull String[] args)
+	public void edit(@NotNull Player player, int elementIndex, @NotNull String[] args)
 	{
 		if(elementIndex < 0 || elementIndex >= elements.size())
 			return;
@@ -156,7 +156,7 @@ public class ChatMenu implements IElementContainer
 	 *
 	 * @param player the player to send the menu to.
 	 */
-	public void openFor(@Nonnull Player player)
+	public void openFor(@NotNull Player player)
 	{
 		PlayerChatIntercept chat = ChatMenuAPI.getChatIntercept(player);
 		if(viewers.add(player) && pauseChat)
@@ -176,7 +176,7 @@ public class ChatMenu implements IElementContainer
 			openFor(viewer);
 	}
 
-	@Nonnull
+	@NotNull
 	public List<BaseComponent[]> build()
 	{
 		Element overlapping = findOverlap();
@@ -243,7 +243,7 @@ public class ChatMenu implements IElementContainer
 	 *
 	 * @param player the player that closed the menu
 	 */
-	public void close(@Nonnull Player player)
+	public void close(@NotNull Player player)
 	{
 		if(viewers.remove(player))
 		{
@@ -254,7 +254,7 @@ public class ChatMenu implements IElementContainer
 			unregister();
 	}
 	
-	void onClosed(@Nonnull Player player)
+	void onClosed(@NotNull Player player)
 	{
 		if(viewers.remove(player))
 			ChatMenuAPI.getChatIntercept(player).resume();
@@ -263,7 +263,7 @@ public class ChatMenu implements IElementContainer
 	/**
 	 * @return the command used to interact with this menu
 	 */
-	@Nonnull
+	@NotNull
 	public String getCommand()
 	{
 		if(!isRegistered())
@@ -275,8 +275,8 @@ public class ChatMenu implements IElementContainer
 	 * @param element the element to interact with
 	 * @return the command used to interact with the provided element
 	 */
-	@Nonnull
-	public String getCommand(@Nonnull Element element)
+	@NotNull
+	public String getCommand(@NotNull Element element)
 	{
 		return getCommand() + elements.indexOf(element)+" ";
 	}
@@ -302,7 +302,7 @@ public class ChatMenu implements IElementContainer
 	 * Makes this menu pause chat when it is opened
 	 * @return this
 	 */
-	@Nonnull
+	@NotNull
 	public ChatMenu pauseChat()
 	{
 		setPauseChat(true);
@@ -317,8 +317,8 @@ public class ChatMenu implements IElementContainer
 	 * @param text the text of the close button
 	 * @return this
 	 */
-	@Nonnull
-	public ChatMenu pauseChat(int x, int y, @Nonnull String text)
+	@NotNull
+	public ChatMenu pauseChat(int x, int y, @NotNull String text)
 	{
 		setPauseChat(true);
 		add(ButtonElement.createCloseButton(x, y, text, this));

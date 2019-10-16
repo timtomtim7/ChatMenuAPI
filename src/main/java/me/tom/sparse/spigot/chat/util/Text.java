@@ -4,7 +4,7 @@ import me.tom.sparse.spigot.chat.menu.ChatMenuAPI;
 import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.TextComponent;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 import java.util.*;
 
 /**
@@ -12,7 +12,7 @@ import java.util.*;
  */
 public class Text
 {
-	@Nonnull
+	@NotNull
 	protected List<BaseComponent> components = new ArrayList<>();
 	protected int                 width      = 0;
 	
@@ -30,7 +30,7 @@ public class Text
 	 *
 	 * @param text the starting text
 	 */
-	public Text(@Nonnull String text)
+	public Text(@NotNull String text)
 	{
 		if(text.contains("\n"))
 			throw new IllegalArgumentException("Text cannot have newline characters");
@@ -44,7 +44,7 @@ public class Text
 	 *
 	 * @param components the starting components
 	 */
-	public Text(@Nonnull BaseComponent... components)
+	public Text(@NotNull BaseComponent... components)
 	{
 		this(Arrays.asList(components));
 	}
@@ -54,7 +54,7 @@ public class Text
 	 *
 	 * @param components the starting components
 	 */
-	public Text(@Nonnull Collection<BaseComponent> components)
+	public Text(@NotNull Collection<BaseComponent> components)
 	{
 		this.components.addAll(components);
 		if(toLegacyText().contains("\n"))
@@ -75,7 +75,7 @@ public class Text
 	 *
 	 * @param other the {@code Text} to append
 	 */
-	public void append(@Nonnull Text other)
+	public void append(@NotNull Text other)
 	{
 		components.addAll(other.components);
 		width += other.width;
@@ -86,7 +86,7 @@ public class Text
 	 *
 	 * @param text the text to append
 	 */
-	public void append(@Nonnull String text)
+	public void append(@NotNull String text)
 	{
 		if(text.contains("\n"))
 			throw new IllegalArgumentException("Text cannot have newline characters");
@@ -99,7 +99,7 @@ public class Text
 	 *
 	 * @param components the components to append
 	 */
-	public void append(@Nonnull BaseComponent... components)
+	public void append(@NotNull BaseComponent... components)
 	{
 		Collections.addAll(this.components, components);
 		calculateWidth();
@@ -150,7 +150,7 @@ public class Text
 	/**
 	 * @return the components of this {@code Text} object converted to legacy.
 	 */
-	@Nonnull
+	@NotNull
 	public String toLegacyText()
 	{
 		return TextComponent.toLegacyText(components.toArray(new BaseComponent[components.size()]));
@@ -161,7 +161,7 @@ public class Text
 	 *
 	 * @return the backing list of the components in this {@code Text} object.
 	 */
-	@Nonnull
+	@NotNull
 	public List<BaseComponent> getComponents()
 	{
 		return components;

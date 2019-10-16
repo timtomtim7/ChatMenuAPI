@@ -7,7 +7,7 @@ import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.TextComponent;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -95,7 +95,7 @@ public class ImageElement extends Element
 		return result;
 	}
 	
-	public void edit(@Nonnull IElementContainer container, @Nonnull String[] args)
+	public void edit(@NotNull IElementContainer container, @NotNull String[] args)
 	{
 		int index = Integer.parseInt(args[0]);
 		colors[index] = onPixelClick(index / 20, index % 20, colors[index]);

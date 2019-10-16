@@ -6,8 +6,8 @@ import me.tom.sparse.spigot.chat.util.Text;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -81,7 +81,7 @@ public abstract class Element
 	 *
 	 * @param clickSound the new sound
 	 */
-	public void setClickSound(@Nonnull Sound clickSound)
+	public void setClickSound(@NotNull Sound clickSound)
 	{
 		this.clickSound = clickSound;
 	}
@@ -180,7 +180,7 @@ public abstract class Element
 	 * @param other the element to detect collision with
 	 * @return true of the elements overlap
 	 */
-	public final boolean overlaps(@Nonnull Element other)
+	public final boolean overlaps(@NotNull Element other)
 	{
 		if(other == this)
 			return false;
@@ -225,7 +225,7 @@ public abstract class Element
 	 * @param player the player that clicked this element
 	 * @return true if the menu should rebuild and resend
 	 */
-	public boolean onClick(@Nonnull IElementContainer container, @Nonnull Player player)
+	public boolean onClick(@NotNull IElementContainer container, @NotNull Player player)
 	{
 		if(clickSound != null)
 			player.playSound(player.getEyeLocation(), clickSound, clickVolume, clickPitch);
@@ -237,12 +237,12 @@ public abstract class Element
 	 *  @param container the container this element is being edited on
 	 * @param args the data to be parsed
 	 */
-	public abstract void edit(@Nonnull IElementContainer container, @Nonnull String[] args);
+	public abstract void edit(@NotNull IElementContainer container, @NotNull String[] args);
 	
 	/**
 	 * @return an unmodifiable {@link java.util.Collection} of all the states in this element.
 	 */
-	@Nonnull
+	@NotNull
 	public Collection<State<?>> getStates()
 	{
 		return Collections.emptyList();
