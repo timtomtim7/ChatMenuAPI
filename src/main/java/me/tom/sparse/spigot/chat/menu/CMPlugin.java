@@ -8,7 +8,6 @@ public class CMPlugin extends JavaPlugin
 	public void onEnable()
 	{
 		ChatMenuAPI.init(this);
-		new LogFilter();
 	}
 	
 	public void onDisable()

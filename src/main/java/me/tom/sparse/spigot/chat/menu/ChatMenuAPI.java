@@ -2,6 +2,7 @@ package me.tom.sparse.spigot.chat.menu;
 
 import me.tom.sparse.spigot.chat.protocol.ChatPacketInterceptor;
 import me.tom.sparse.spigot.chat.protocol.PlayerChatIntercept;
+import me.tom.sparse.spigot.chat.util.LogFilter;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.map.MapFont;
@@ -183,6 +184,7 @@ public final class ChatMenuAPI
 		ChatMenuAPI.plugin = plugin;
 //		Bukkit.getPluginCommand("cmapi").setExecutor(new CMCommand());
 		new CMListener(plugin);
+		new LogFilter();
 		
 		try
 		{
