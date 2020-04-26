@@ -42,30 +42,4 @@ public class CMCommand implements CommandExecutor
 		return true;
 	}
 
-//	private static Filter originalFilter;
-//	private static PrintStream originalOut;
-	
-	static void setLoggerFilter()
-	{
-//		System.setOut(new PrintStream(new FilterOutputStream(originalOut = System.out) {
-//			public void write(byte[] b) throws IOException
-//			{
-//				if(new String(b).contains("/cmapi"))
-//					return;
-//				super.write(b);
-//			}
-//		}));
-
-//		Logger logger = Bukkit.getLogger();
-//		originalFilter = logger.getFilter();
-//		logger.setFilter(record -> !record.getMessage().contains("/cmapi"));
-//		logger.setFilter(record -> false);
-	}
-	
-	static void restoreLoggerFilter()
-	{
-//		System.setOut(originalOut);
-//		Bukkit.getLogger().setFilter(originalFilter);
-	}
-	
 }

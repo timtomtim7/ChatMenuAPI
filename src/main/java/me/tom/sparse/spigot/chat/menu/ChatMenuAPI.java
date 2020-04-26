@@ -182,7 +182,6 @@ public final class ChatMenuAPI
 		
 		ChatMenuAPI.plugin = plugin;
 //		Bukkit.getPluginCommand("cmapi").setExecutor(new CMCommand());
-		CMCommand.setLoggerFilter();
 		new CMListener(plugin);
 		
 		try
@@ -205,7 +204,6 @@ public final class ChatMenuAPI
 		if(plugin == null)
 			return;
 		
-		CMCommand.restoreLoggerFilter();
 		plugin = null;
 		interceptor.disable();
 	}
